@@ -6,7 +6,7 @@
   <title>Your Name — Creative Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,700;1,9..144,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     /* ─── Reset & Base ───────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,7 +23,9 @@
       --border: rgba(240, 237, 232, 0.08);
       --border-hover: rgba(240, 237, 232, 0.16);
       --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --serif: 'Fraunces', Georgia, serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
       --radius: 12px;
     }
 
@@ -124,8 +126,8 @@
 
     .nav-links a {
       font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
+      font-weight: 400;
+      letter-spacing: 0.025em;
       color: var(--text-muted);
       transition: color 0.2s;
       position: relative;
@@ -283,10 +285,18 @@
 
     .hero-title {
       font-size: clamp(52px, 8vw, 118px);
+      font-family: var(--serif);
       font-weight: 800;
       line-height: 0.92;
       letter-spacing: -0.04em;
       max-width: 1100px;
+      font-optical-sizing: auto;
+    }
+
+    .hero-title .serif-italic {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--pink);
     }
 
     .hero-title .line { display: block; overflow: hidden; padding-bottom: 0.05em; }
@@ -315,10 +325,10 @@
     }
 
     .hero-tagline {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 400;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.7;
       max-width: 340px;
     }
 
@@ -373,7 +383,9 @@
     }
 
     /* ─── Section Base ───────────────────────────────────────── */
-    section { padding: 100px 40px; }
+    section { padding: 120px 40px; }
+
+    body { counter-reset: sections; }
 
     .section-label {
       font-size: 11px;
@@ -384,15 +396,18 @@
       margin-bottom: 48px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      counter-increment: sections;
     }
 
     .section-label::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--text-muted);
+      content: counter(sections, decimal-leading-zero);
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      text-transform: none;
     }
 
     /* ─── Playground Grid ────────────────────────────────────── */
@@ -470,12 +485,12 @@
       backdrop-filter: blur(8px);
       padding: 4px 10px;
       border-radius: 100px;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: all 0.3s var(--ease);
+      opacity: 0.4;
+      transform: translateY(0);
+      transition: opacity 0.3s var(--ease);
     }
 
-    .pg-item:hover .pg-label { opacity: 1; transform: translateY(0); }
+    .pg-item:hover .pg-label { opacity: 1; }
 
     /* Gradient swatches for placeholder thumbnails */
     .grad-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
@@ -512,7 +527,7 @@
       grid-template-columns: 160px 1fr auto;
       align-items: center;
       gap: 32px;
-      padding: 28px 0;
+      padding: 36px 0;
       border-bottom: 1px solid var(--border);
       cursor: none;
       position: relative;
@@ -551,11 +566,13 @@
     .work-info { z-index: 1; }
 
     .work-name {
-      font-size: 22px;
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.2vw, 28px);
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
       margin-bottom: 8px;
       transition: color 0.2s;
+      font-optical-sizing: auto;
     }
 
     .work-item:hover .work-name { color: var(--pink); }
@@ -676,11 +693,18 @@
     .about-right {}
 
     .about-heading {
+      font-family: var(--serif);
       font-size: clamp(32px, 4vw, 52px);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.05;
       margin-bottom: 32px;
+      font-optical-sizing: auto;
+    }
+
+    .about-heading em {
+      font-style: italic;
+      font-weight: 300;
     }
 
     .about-body {
@@ -760,11 +784,13 @@
     }
 
     .newsletter-heading {
+      font-family: var(--serif);
       font-size: clamp(36px, 5vw, 72px);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.05;
       margin-bottom: 24px;
+      font-optical-sizing: auto;
     }
 
     .newsletter-sub {
@@ -840,6 +866,44 @@
 
     .footer-socials a:hover { color: var(--text); }
 
+    .footer-status {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      width: 100%;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    /* ─── Work Hover Preview ─────────────────────────────────── */
+    .work-hover-preview {
+      position: fixed;
+      width: 220px;
+      height: 140px;
+      border-radius: 10px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 500;
+      opacity: 0;
+      transform: scale(0.88) rotate(-2deg);
+      transition: opacity 0.3s var(--ease), transform 0.4s var(--ease);
+      will-change: transform, opacity;
+      top: 0; left: 0;
+    }
+
+    .work-hover-preview.active {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    .work-hover-preview .pg-bg {
+      position: absolute;
+      inset: 0;
+    }
+
     .back-to-top {
       display: inline-flex;
       align-items: center;
@@ -863,8 +927,8 @@
     /* ─── Scroll Fade-In ─────────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+      transform: translateY(16px);
+      transition: opacity 0.8s var(--ease-expo), transform 0.9s var(--ease-expo);
     }
 
     .reveal.visible {
@@ -969,7 +1033,7 @@
     <div class="hero-content">
       <h1 class="hero-title">
         <span class="line"><span>Independent</span></span>
-        <span class="line"><span>Creative <span class="accent">Director</span></span></span>
+        <span class="line"><span>Creative <em class="serif-italic">Director</em></span></span>
         <span class="line"><span>&amp; Designer</span></span>
       </h1>
       <div class="hero-meta">
@@ -1206,7 +1270,7 @@
     </div>
     <div class="about-right">
       <div class="section-label reveal">About</div>
-      <h2 class="about-heading reveal">An independent<br>designer &amp;<br>creative director</h2>
+      <h2 class="about-heading reveal"><em>An independent</em><br>designer &amp;<br>creative director</h2>
       <p class="about-body reveal">
         Over a decade of experience building brands, products, and visual systems that people actually remember. Working across branding, illustration, animation, and strategy — bringing ideas to life from first sketch to final pixel.
       </p>
@@ -1267,6 +1331,7 @@
 
   <!-- ─── Footer ───────────────────────────────────────────── -->
   <footer>
+    <p class="footer-status">Available for new projects</p>
     <a href="mailto:hello@yourname.com" class="footer-email">hello@yourname.com</a>
     <div class="footer-socials">
       <a href="#">Twitter</a>
@@ -1405,6 +1470,40 @@
         s.style.marginTop = `${y * rates[i]}px`;
       });
     }, { passive: true });
+    // ── Work hover preview (Karina-inspired cursor follower) ─
+    const preview = document.createElement('div');
+    preview.className = 'work-hover-preview';
+    preview.innerHTML = '<div class="pg-bg"></div>';
+    document.body.appendChild(preview);
+    const previewBg = preview.querySelector('.pg-bg');
+
+    let previewX = 0, previewY = 0, targetPreviewX = 0, targetPreviewY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      targetPreviewX = e.clientX + 28;
+      targetPreviewY = e.clientY - 80;
+    });
+
+    (function animPreview() {
+      previewX += (targetPreviewX - previewX) * 0.1;
+      previewY += (targetPreviewY - previewY) * 0.1;
+      preview.style.left = previewX + 'px';
+      preview.style.top  = previewY + 'px';
+      requestAnimationFrame(animPreview);
+    })();
+
+    document.querySelectorAll('.work-item').forEach(item => {
+      const thumb = item.querySelector('.work-thumb .pg-bg');
+      if (!thumb) return;
+      const gradClass = [...thumb.classList].find(c => c.startsWith('grad-'));
+      item.addEventListener('mouseenter', () => {
+        previewBg.className = 'pg-bg ' + (gradClass || '');
+        preview.classList.add('active');
+      });
+      item.addEventListener('mouseleave', () => {
+        preview.classList.remove('active');
+      });
+    });
   </script>
 </body>
 </html>
