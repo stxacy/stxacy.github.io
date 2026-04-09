@@ -208,6 +208,7 @@
       user-select: none;
       z-index: 1;
       overflow: hidden;
+      will-change: transform;
     }
 
     .shape {
@@ -305,6 +306,7 @@
       position: relative;
       z-index: 2;
       padding: 80px 60px 80px 60px;
+      will-change: transform;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -918,6 +920,7 @@
 
     <!-- Right: character illustration -->
     <div class="hero-right">
+      <div id="charWrap" style="width:100%;height:100%;display:flex;align-items:flex-end;justify-content:center;will-change:transform;">
       <svg class="hero-character" viewBox="0 0 480 680" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Body -->
         <rect x="140" y="360" width="200" height="280" rx="48" fill="#e8153a"/>
@@ -971,6 +974,7 @@
         <ellipse cx="192" cy="665" rx="38" ry="16" fill="#1e1e1e"/>
         <ellipse cx="288" cy="665" rx="38" ry="16" fill="#1e1e1e"/>
       </svg>
+      </div><!-- /charWrap -->
     </div>
 
   </section>
@@ -1210,31 +1214,46 @@
 
   <!-- ─── Scripts ──────────────────────────────────────────── -->
   <script>
-    // ── Custom Cursor ───────────────────────────────────────
-    const cursor    = document.getElementById('cursor');
-    const cursorDot = document.getElementById('cursor-dot');
-    const eyeL      = document.getElementById('eye-l');
-    const eyeR      = document.getElementById('eye-r');
-    const smile     = document.getElementById('smile');
+    // ── Element refs ────────────────────────────────────────
+    const cursor     = document.getElementById('cursor');
+    const cursorDot  = document.getElementById('cursor-dot');
+    const eyeL       = document.getElementById('eye-l');
+    const eyeR       = document.getElementById('eye-r');
+    const smile      = document.getElementById('smile');
+    const nav        = document.getElementById('mainNav');
+    const charWrap   = document.getElementById('charWrap');
+    const heroLeft   = document.querySelector('.hero-left');
+    const heroShapes = document.getElementById('heroShapes');
+    const shapes     = document.querySelectorAll('.shape');
+    const infoPortrait = document.querySelector('.info-portrait');
+    const charEyeL   = document.getElementById('charEyeL');
+    const charEyeR   = document.getElementById('charEyeR');
 
-    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    // ── State ───────────────────────────────────────────────
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    // Normalised mouse position (-0.5 → 0.5) for parallax
+    let parRawX = 0, parRawY = 0;
+    let parX = 0, parY = 0;
+    let scrollY = window.scrollY;
+    let hoverCount = 0;
 
+    // ── Input capture ────────────────────────────────────────
     document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      mouseX  = e.clientX;
+      mouseY  = e.clientY;
+      parRawX = e.clientX / window.innerWidth  - 0.5;
+      parRawY = e.clientY / window.innerHeight - 0.5;
       cursorDot.style.left = mouseX + 'px';
       cursorDot.style.top  = mouseY + 'px';
     });
 
-    (function animCursor() {
-      cursorX += (mouseX - cursorX) * 0.12;
-      cursorY += (mouseY - cursorY) * 0.12;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top  = cursorY + 'px';
-      requestAnimationFrame(animCursor);
-    })();
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+      nav.classList.toggle('nav-scrolled', scrollY > 20);
+    }, { passive: true });
 
-    let hoverCount = 0;
+    // ── Cursor hover reactions ───────────────────────────────
     const hoverTargets = document.querySelectorAll('a, button, .pg-item:not(.pg-spacer), .back-to-top');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => {
@@ -1255,13 +1274,7 @@
       });
     });
 
-    // ── Nav scroll glass ────────────────────────────────────
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 20);
-    }, { passive: true });
-
-    // ── Scroll Reveal ───────────────────────────────────────
+    // ── Scroll reveal ────────────────────────────────────────
     const reveals  = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1272,25 +1285,91 @@
     const sectionMap = new Map();
     reveals.forEach(el => {
       const section = el.closest('section, footer') || document.body;
-      const idx     = (sectionMap.get(section) || 0);
+      const idx = sectionMap.get(section) || 0;
       el.style.transitionDelay = `${(idx % 5) * 0.055}s`;
       sectionMap.set(section, idx + 1);
       observer.observe(el);
     });
 
-    // ── Shapes: drop-in → float ─────────────────────────────
-    const shapes   = document.querySelectorAll('.shape');
+    // ── Shapes: drop-in → float ──────────────────────────────
     const maxDelay = 450 + 1100 + 150;
     setTimeout(() => shapes.forEach(s => s.classList.add('landed')), maxDelay);
 
-    // ── Parallax on hero shapes ─────────────────────────────
-    const rates = [0.08, 0.14, 0.06, 0.12, 0.10];
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      shapes.forEach((s, i) => { s.style.marginTop = `${y * rates[i]}px`; });
-    }, { passive: true });
+    // Scroll rates per shape (marginTop avoids conflicting with CSS float transform)
+    const shapeScrollRates = [0.08, 0.14, 0.06, 0.12, 0.10];
 
-    // ── Nav newsletter ──────────────────────────────────────
+    // ── Unified RAF loop ─────────────────────────────────────
+    // All animation in one loop: cursor + mouse parallax + scroll parallax
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    (function rafLoop() {
+      requestAnimationFrame(rafLoop);
+
+      // — Cursor lerp
+      cursorX = lerp(cursorX, mouseX, 0.12);
+      cursorY = lerp(cursorY, mouseY, 0.12);
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top  = cursorY + 'px';
+
+      // — Mouse parallax lerp (slower = silkier feel)
+      parX = lerp(parX, parRawX, 0.045);
+      parY = lerp(parY, parRawY, 0.045);
+
+      // — Hero shapes: scroll depth (marginTop) + mouse lateral drift
+      shapes.forEach((s, i) => {
+        s.style.marginTop = `${scrollY * shapeScrollRates[i]}px`;
+      });
+      // Shapes container drifts opposite to mouse — creates 3-D depth illusion
+      if (heroShapes) {
+        heroShapes.style.transform =
+          `translate(${parX * -28}px, ${parY * -18}px)`;
+      }
+
+      // — Character: scroll up faster than page + mouse drift (opposite layer to shapes)
+      if (charWrap) {
+        const cy = -scrollY * 0.22;
+        const cx =  parX * 24;
+        charWrap.style.transform = `translateY(${cy}px) translateX(${cx}px)`;
+      }
+
+      // — Hero text: scroll up slower than page (feels behind the character)
+      //   Mouse moves slightly opposite to character for depth separation
+      if (heroLeft) {
+        const ty = -scrollY * 0.07;
+        const tx =  parX * -10;
+        heroLeft.style.transform = `translateY(${ty}px) translateX(${tx}px)`;
+      }
+
+      // — Info portrait: subtle upward drift as section scrolls into view
+      if (infoPortrait) {
+        const rect = infoPortrait.getBoundingClientRect();
+        const mid  = rect.top + rect.height * 0.5;
+        const rel  = (mid - window.innerHeight * 0.5) / window.innerHeight;
+        infoPortrait.style.transform = `translateY(${rel * -36}px)`;
+      }
+
+      // — Character eye tracking (runs inside RAF, no extra listener needed)
+      if (charEyeL && charEyeR) {
+        const heroRightEl = document.querySelector('.hero-right');
+        if (heroRightEl) {
+          const r   = heroRightEl.getBoundingClientRect();
+          const cx  = r.left + r.width  * 0.5;
+          const cy  = r.top  + r.height * 0.42;
+          const dx  = mouseX - cx;
+          const dy  = mouseY - cy;
+          const ang = Math.atan2(dy, dx);
+          const d   = Math.min(5, Math.hypot(dx, dy) / 40);
+          const ox  = Math.cos(ang) * d;
+          const oy  = Math.sin(ang) * d;
+          charEyeL.setAttribute('cx', 212 + ox);
+          charEyeL.setAttribute('cy', 230 + oy);
+          charEyeR.setAttribute('cx', 276 + ox);
+          charEyeR.setAttribute('cy', 230 + oy);
+        }
+      }
+    })();
+
+    // ── Nav newsletter ───────────────────────────────────────
     function handleNavSubscribe(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button');
@@ -1303,28 +1382,6 @@
         e.target.reset();
         inp.style.width = '';
       }, 2500);
-    }
-
-    // ── Character eye tracking ───────────────────────────────
-    const charEyeL = document.getElementById('charEyeL');
-    const charEyeR = document.getElementById('charEyeR');
-    if (charEyeL && charEyeR) {
-      document.addEventListener('mousemove', (e) => {
-        const rect = document.querySelector('.hero-right')?.getBoundingClientRect();
-        if (!rect) return;
-        const cx  = rect.left + rect.width * 0.5;
-        const cy  = rect.top  + rect.height * 0.42;
-        const dx  = e.clientX - cx;
-        const dy  = e.clientY - cy;
-        const ang = Math.atan2(dy, dx);
-        const d   = Math.min(5, Math.hypot(dx, dy) / 40);
-        const ox  = Math.cos(ang) * d;
-        const oy  = Math.sin(ang) * d;
-        charEyeL.setAttribute('cx', 212 + ox);
-        charEyeL.setAttribute('cy', 230 + oy);
-        charEyeR.setAttribute('cx', 276 + ox);
-        charEyeR.setAttribute('cy', 230 + oy);
-      });
     }
   </script>
 </body>
