@@ -921,27 +921,14 @@
 
   <!-- ─── Navigation ────────────────────────────────────────── -->
   <nav id="mainNav">
-    <a href="#" class="nav-logo">YN<span style="color:var(--pink)">.</span></a>
+    <a href="#" class="nav-logo">VR<span style="color:var(--pink)">.</span></a>
 
     <ul class="nav-links">
       <li><a href="#info">Info</a></li>
       <li><a href="#playground">Playground</a></li>
-      <li><a href="mailto:hello@yourname.com">Contact</a></li>
+      <li><a href="mailto:vik@stxacy.com">Contact</a></li>
     </ul>
 
-    <form class="nav-newsletter" onsubmit="handleNavSubscribe(event)">
-      <input
-        class="nav-newsletter-input"
-        type="email"
-        placeholder="Join newsletter — your@email.com"
-        required
-      >
-      <button type="submit" class="nav-newsletter-btn" aria-label="Subscribe">
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </form>
   </nav>
 
   <!-- ─── Split layout: hero col + playground col ─────────── -->
@@ -1215,7 +1202,7 @@
   <footer>
     <div class="footer-left">
       <span class="footer-status">Available for new projects</span>
-      <a href="mailto:hello@yourname.com" class="footer-email">hello@yourname.com</a>
+      <a href="mailto:vik@stxacy.com" class="footer-email">vik@stxacy.com</a>
     </div>
     <div class="footer-socials">
       <a href="#">Dribbble</a>
@@ -1286,6 +1273,62 @@
         infoPortrait.style.transform = `translateY(${rel * -36}px)`;
       })();
     }
+
+    // ── Tile repulsion (hover centralises the hovered tile) ──
+    (function () {
+      function lerp2(a, b, t) { return a + (b - a) * t; }
+
+      const tiles = [...document.querySelectorAll('.pg-item:not(.pg-spacer)')];
+      let hoveredIdx = -1;
+
+      // Strip par-item class per tile after its own entrance finishes
+      tiles.forEach((el, i) => {
+        const ms = 480 + (0.32 + i * 0.042) * 1000 + 1150;
+        setTimeout(() => {
+          el.classList.remove('par-item');
+          ['--pd', '--py', '--ps'].forEach(p => el.style.removeProperty(p));
+        }, ms);
+      });
+
+      const rep = tiles.map(() => ({ tx: 0, ty: 0, cx: 0, cy: 0 }));
+
+      tiles.forEach((tile, i) => {
+        tile.addEventListener('mouseenter', () => { hoveredIdx = i; });
+        tile.addEventListener('mouseleave', () => { hoveredIdx = -1; });
+      });
+
+      (function loop() {
+        requestAnimationFrame(loop);
+
+        if (hoveredIdx >= 0 && tiles[hoveredIdx]) {
+          const hr = tiles[hoveredIdx].getBoundingClientRect();
+          const hx = hr.left + hr.width  * 0.5;
+          const hy = hr.top  + hr.height * 0.5;
+
+          tiles.forEach((tile, i) => {
+            if (i === hoveredIdx) { rep[i].tx = rep[i].ty = 0; return; }
+            const r  = tile.getBoundingClientRect();
+            const dx = (r.left + r.width  * 0.5) - hx;
+            const dy = (r.top  + r.height * 0.5) - hy;
+            const dist  = Math.sqrt(dx * dx + dy * dy) || 1;
+            const force = Math.pow(Math.max(0, 1 - dist / 420), 1.8) * 18;
+            rep[i].tx = (dx / dist) * force;
+            rep[i].ty = (dy / dist) * force;
+          });
+        } else {
+          tiles.forEach((_, i) => { rep[i].tx = rep[i].ty = 0; });
+        }
+
+        tiles.forEach((tile, i) => {
+          rep[i].cx = lerp2(rep[i].cx, rep[i].tx, 0.09);
+          rep[i].cy = lerp2(rep[i].cy, rep[i].ty, 0.09);
+          if (!tile.classList.contains('par-item')) {
+            tile.style.transform =
+              `translate(${rep[i].cx.toFixed(2)}px, ${rep[i].cy.toFixed(2)}px)`;
+          }
+        });
+      })();
+    })();
 
     // ── Contact form toggle ──────────────────────────────────
     const contactToggle   = document.getElementById('contactToggle');
