@@ -6,7 +6,7 @@
   <title>Your Name — Creative Director</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,700;1,9..144,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     /* ─── Reset & Base ───────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -186,18 +186,11 @@
 
     .hero-title {
       font-size: clamp(24px, 2.2vw, 36px);
-      font-family: var(--serif);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-family: var(--font);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
       margin-bottom: 24px;
-      font-optical-sizing: auto;
-    }
-
-    .hero-title .serif-italic {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--pink);
     }
 
     .hero-title .line { display: block; overflow: hidden; padding-bottom: 0.05em; }
@@ -615,13 +608,12 @@
     .info-right {}
 
     .info-heading {
-      font-family: var(--serif);
+      font-family: var(--font);
       font-size: clamp(30px, 3.5vw, 48px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       line-height: 1.05;
       margin-bottom: 28px;
-      font-optical-sizing: auto;
     }
 
     .info-heading em {
@@ -751,7 +743,7 @@
 
     .footer-email {
       font-size: 22px;
-      font-family: var(--serif);
+      font-family: var(--font);
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--text);
@@ -887,9 +879,9 @@
 
       <div class="hero-left">
         <h1 class="hero-title">
-          <span class="line"><span>Independent</span></span>
-          <span class="line"><span>Creative <em class="serif-italic">Director</em></span></span>
-          <span class="line"><span>&amp; Designer</span></span>
+          <span class="line"><span>Digital Experience</span></span>
+          <span class="line"><span>Designer &amp;</span></span>
+          <span class="line"><span>AI-Powered Creative</span></span>
         </h1>
         <p class="hero-tagline">Building brands, products, and experiences that connect — from concept to launch.</p>
 
@@ -916,17 +908,14 @@
       <!-- Socials — anchored to bottom via margin-top:auto on .hero-socials -->
       <div class="hero-socials">
         <p class="hero-socials-label">Find me on</p>
-        <a href="https://twitter.com/" target="_blank" rel="noopener" class="hero-social-link">
-          X / Twitter <span class="hero-social-arrow">↗</span>
-        </a>
         <a href="https://dribbble.com/" target="_blank" rel="noopener" class="hero-social-link">
           Dribbble <span class="hero-social-arrow">↗</span>
         </a>
         <a href="https://instagram.com/" target="_blank" rel="noopener" class="hero-social-link">
           Instagram <span class="hero-social-arrow">↗</span>
         </a>
-        <a href="https://twitch.tv/" target="_blank" rel="noopener" class="hero-social-link">
-          Twitch <span class="hero-social-arrow">↗</span>
+        <a href="https://discord.com/" target="_blank" rel="noopener" class="hero-social-link">
+          Discord <span class="hero-social-arrow">↗</span>
         </a>
       </div>
 
@@ -1102,20 +1091,17 @@
       <div class="section-label reveal">Info</div>
 
       <h2 class="info-heading reveal">
-        <em>15 years of</em><br>
-        exploratory design<br>
-        &amp; art direction
+        About me
       </h2>
 
       <p class="info-body reveal">
-        Principal and director-level experience across branding, illustration, animation, and strategy. Working at the intersection of design and emerging technology — bringing ideas to life from first sketch to final pixel. Clients include Walmart, Google, Riot Games, Snapchat, Discord, and many others.
+        STXACY is the digital persona of Vik Rathore — a London-based creative transitioning into UX/UI design, web development, and AI tools. Bringing a sharp eye for systems, people, and performance honed across a decade of high-pressure environments. From coordinating large-scale live events at Glastonbury to coaching athletes and managing logistics operations across the UK, Vik has spent years problem-solving on the fly and leading teams through complexity. Now channelling that same energy into building digital experiences that are intuitive, purposeful, and human-first.
       </p>
 
       <div class="info-socials reveal">
-        <a href="#">X / Twitter</a>
         <a href="#">Dribbble</a>
         <a href="#">Instagram</a>
-        <a href="#">Twitch</a>
+        <a href="#">Discord</a>
       </div>
 
       <!-- Client logos marquee — lives inside info section -->
@@ -1159,10 +1145,9 @@
       <a href="mailto:hello@yourname.com" class="footer-email">hello@yourname.com</a>
     </div>
     <div class="footer-socials">
-      <a href="#">X / Twitter</a>
       <a href="#">Dribbble</a>
       <a href="#">Instagram</a>
-      <a href="#">Twitch</a>
+      <a href="#">Discord</a>
     </div>
     <a href="#home" class="back-to-top" aria-label="Back to top">↑</a>
   </footer>
