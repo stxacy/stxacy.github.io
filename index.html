@@ -189,31 +189,39 @@
 
     .nav-newsletter-btn svg { width: 14px; height: 14px; }
 
-    /* ─── Hero ───────────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      padding-top: 64px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
+    /* ─── Split layout (hero left col + playground right col) ── */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      margin-top: 64px;         /* clear nav */
+      align-items: start;
+      border-top: 1px solid var(--border);
     }
 
-    /* ─── Hero Content ──────────────────────────────────────── */
+    /* ─── Hero col — sticky, compact ───────────────────────── */
+    .hero-col {
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 36px 48px 60px;
+      overflow: hidden;
+    }
+
     .hero-left {
-      position: relative;
-      z-index: 2;
-      padding: 0 60px 80px;
       will-change: transform;
     }
 
     .hero-title {
-      font-size: clamp(52px, 7.5vw, 114px);
+      font-size: clamp(24px, 2.2vw, 36px);
       font-family: var(--serif);
       font-weight: 800;
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      margin-bottom: 48px;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
       font-optical-sizing: auto;
     }
 
@@ -238,23 +246,22 @@
     }
 
     .hero-tagline {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 400;
       color: var(--text-muted);
       line-height: 1.7;
-      max-width: 320px;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
 
     .hero-cta {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 10px 20px;
       background: var(--text);
       color: var(--bg);
       border-radius: 100px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       font-family: var(--font);
       cursor: none;
@@ -265,6 +272,26 @@
       background: var(--pink);
       color: #fff;
       transform: translateY(-1px);
+    }
+
+    /* Small availability badge in hero bottom */
+    .hero-status {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     /* ─── Section Base ───────────────────────────────────────── */
@@ -294,10 +321,10 @@
       color: var(--text-dim);
     }
 
-    /* ─── Playground ─────────────────────────────────────────── */
-    #playground {
-      border-top: 1px solid var(--border);
-      padding-top: 80px;
+    /* ─── Playground col ─────────────────────────────────────── */
+    .playground-col {
+      padding: 48px 60px 120px 48px;
+      min-height: calc(100vh - 64px);
     }
 
     .playground-header {
@@ -305,12 +332,6 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 32px;
-    }
-
-    .playground-title {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
     }
 
     .btn-outline {
@@ -674,11 +695,26 @@
     }
 
     /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .split-layout { grid-template-columns: 260px 1fr; }
+      .hero-col { padding: 40px 28px 40px 40px; }
+      .playground-col { padding: 40px 40px 100px 36px; }
+    }
+
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
       .nav-newsletter { display: none; }
       section { padding: 80px 24px; }
-      .hero-left { padding: 0 24px 60px; }
+      /* Stack hero above playground on tablet */
+      .split-layout { grid-template-columns: 1fr; }
+      .hero-col {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 48px 24px 40px;
+      }
+      .playground-col { padding: 40px 24px 80px; }
       .playground-grid { grid-template-columns: repeat(2, 1fr); }
       #info { grid-template-columns: 1fr; gap: 48px; }
       .info-left { position: static; }
@@ -687,8 +723,7 @@
     }
 
     @media (max-width: 600px) {
-      .hero-title { font-size: clamp(40px, 12vw, 72px); }
-      .hero-left { padding: 0 24px 48px; }
+      .hero-title { font-size: clamp(26px, 7vw, 34px); }
       .playground-grid { grid-template-columns: 1fr 1fr; }
       .pg-item.span-2 { grid-column: span 2; }
       .nav-links { gap: 20px; }
@@ -733,27 +768,28 @@
     </form>
   </nav>
 
-  <!-- ─── Hero ──────────────────────────────────────────────── -->
-  <section class="hero" id="home">
+  <!-- ─── Split layout: hero col + playground col ─────────── -->
+  <div class="split-layout">
 
-    <!-- Hero content -->
-    <div class="hero-left">
-      <h1 class="hero-title">
-        <span class="line"><span>Independent</span></span>
-        <span class="line"><span>Creative <em class="serif-italic">Director</em></span></span>
-        <span class="line"><span>&amp; Designer</span></span>
-      </h1>
-      <p class="hero-tagline">Building brands, products, and experiences that connect — from concept to launch.</p>
-      <a href="mailto:hello@yourname.com" class="hero-cta">
-        Get in touch
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <!-- Left: compact hero -->
+    <div class="hero-col" id="home">
+      <div class="hero-left">
+        <h1 class="hero-title">
+          <span class="line"><span>Independent</span></span>
+          <span class="line"><span>Creative <em class="serif-italic">Director</em></span></span>
+          <span class="line"><span>&amp; Designer</span></span>
+        </h1>
+        <p class="hero-tagline">Building brands, products, and experiences that connect — from concept to launch.</p>
+        <a href="mailto:hello@yourname.com" class="hero-cta">
+          Get in touch
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <span class="hero-status">Available for projects</span>
     </div>
 
-  </section>
-
-  <!-- ─── Playground ───────────────────────────────────────── -->
-  <section id="playground">
+    <!-- Right: playground grid -->
+    <div class="playground-col" id="playground">
     <div class="playground-header reveal">
       <div class="section-label" style="margin-bottom:0">Playground</div>
       <a href="#" class="btn-outline">View all ↗</a>
@@ -871,7 +907,8 @@
       </div>
 
     </div>
-  </section>
+    </div><!-- /playground-col -->
+  </div><!-- /split-layout -->
 
   <!-- ─── Info / About ─────────────────────────────────────── -->
   <section id="info">
