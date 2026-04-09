@@ -176,7 +176,8 @@
       flex-direction: column;
       justify-content: flex-start;
       padding: 48px 36px 48px 60px;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .hero-left {
@@ -404,6 +405,7 @@
       display: flex;
       align-items: center;
       gap: 7px;
+      padding-top: 20px;
     }
 
     .hero-status::before {
@@ -928,7 +930,7 @@
         </a>
       </div>
 
-      <span class="hero-status" style="padding-top:20px">Available for projects</span>
+      <span class="hero-status">Available for projects</span>
     </div>
 
     <!-- Right: playground grid -->
@@ -1236,7 +1238,7 @@
       contactToggle.classList.toggle('open', open);
       contactToggle.setAttribute('aria-expanded', String(open));
       contactFormWrap.setAttribute('aria-hidden', String(!open));
-      if (open) contactFormWrap.querySelector('input').focus();
+      if (open) { const firstInput = contactFormWrap.querySelector('input'); if (firstInput) firstInput.focus(); }
     });
 
     function handleContact(e) {
