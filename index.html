@@ -39,40 +39,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    @media (pointer: fine) {
-      body { cursor: none; }
-      #cursor, #cursor-dot { display: block; }
-    }
-    @media (pointer: coarse) {
-      #cursor, #cursor-dot { display: none; }
-    }
-
     a { color: inherit; text-decoration: none; }
     img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-    /* ─── Custom Cursor ──────────────────────────────────────── */
-    #cursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 44px; height: 44px;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s var(--ease), opacity 0.2s;
-    }
-    #cursor svg { width: 100%; height: 100%; }
-    #cursor-dot {
-      position: fixed;
-      top: 0; left: 0;
-      width: 6px; height: 6px;
-      background: var(--pink);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.08s;
-    }
-    body.cursor-hover #cursor { transform: translate(-50%, -50%) scale(1.4); }
 
     /* ─── Noise Overlay ─────────────────────────────────────── */
     body::before {
@@ -177,7 +145,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: none;
+      cursor: pointer;
       flex-shrink: 0;
       transition: background 0.2s, transform 0.2s;
     }
@@ -264,7 +232,7 @@
       font-size: 12px;
       font-weight: 600;
       font-family: var(--font);
-      cursor: none;
+      cursor: pointer;
       transition: background 0.25s var(--ease), transform 0.2s;
     }
 
@@ -346,7 +314,7 @@
       font-size: 13px;
       font-weight: 600;
       font-family: var(--font);
-      cursor: none;
+      cursor: pointer;
       transition: border-color 0.2s, transform 0.2s;
     }
 
@@ -366,7 +334,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       position: relative;
-      cursor: none;
+      cursor: pointer;
       background: var(--surface);
     }
 
@@ -581,7 +549,7 @@
       font-size: 13px;
       font-weight: 700;
       letter-spacing: -0.01em;
-      cursor: none;
+      cursor: pointer;
     }
 
     .client-logo:hover { opacity: 0.7; }
@@ -666,7 +634,7 @@
       color: var(--text-muted);
       font-size: 16px;
       transition: all 0.25s;
-      cursor: none;
+      cursor: pointer;
     }
 
     .back-to-top:hover {
@@ -731,17 +699,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ─── Custom Cursor ─────────────────────────────────────── -->
-  <div id="cursor">
-    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="22" r="21" fill="#0a0a0a" stroke="transparent"/>
-      <ellipse id="eye-l" cx="16" cy="20" rx="2.5" ry="2.5" fill="#f5f2ee"/>
-      <ellipse id="eye-r" cx="28" cy="20" rx="2.5" ry="2.5" fill="#f5f2ee"/>
-      <path id="smile" d="M15 26 Q22 31.5 29 26" stroke="#f5f2ee" stroke-width="2" stroke-linecap="round" fill="none"/>
-    </svg>
-  </div>
-  <div id="cursor-dot"></div>
 
   <!-- ─── Navigation ────────────────────────────────────────── -->
   <nav id="mainNav">
@@ -1024,57 +981,25 @@
 
   <!-- ─── Scripts ──────────────────────────────────────────── -->
   <script>
-    // ── Element refs ────────────────────────────────────────
-    const cursor      = document.getElementById('cursor');
-    const cursorDot   = document.getElementById('cursor-dot');
-    const eyeL        = document.getElementById('eye-l');
-    const eyeR        = document.getElementById('eye-r');
-    const smile       = document.getElementById('smile');
-    const nav         = document.getElementById('mainNav');
-    const heroLeft    = document.querySelector('.hero-left');
+    // ── Refs ────────────────────────────────────────────────
+    const nav          = document.getElementById('mainNav');
+    const heroLeft     = document.querySelector('.hero-left');
     const infoPortrait = document.querySelector('.info-portrait');
 
     // ── State ───────────────────────────────────────────────
-    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
     let parRawX = 0, parRawY = 0, parX = 0, parY = 0;
     let scrollY = window.scrollY;
-    let hoverCount = 0;
 
     // ── Input capture ────────────────────────────────────────
     document.addEventListener('mousemove', (e) => {
-      mouseX  = e.clientX;
-      mouseY  = e.clientY;
       parRawX = e.clientX / window.innerWidth  - 0.5;
       parRawY = e.clientY / window.innerHeight - 0.5;
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top  = mouseY + 'px';
     });
 
     window.addEventListener('scroll', () => {
       scrollY = window.scrollY;
       nav.classList.toggle('nav-scrolled', scrollY > 20);
     }, { passive: true });
-
-    // ── Cursor hover reactions ───────────────────────────────
-    const hoverTargets = document.querySelectorAll('a, button, .pg-item:not(.pg-spacer), .back-to-top');
-    hoverTargets.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        hoverCount++;
-        document.body.classList.add('cursor-hover');
-        smile.setAttribute('d', 'M13 25 Q22 33 31 25');
-        eyeL.setAttribute('rx', '3'); eyeL.setAttribute('ry', '2');
-        eyeR.setAttribute('rx', '3'); eyeR.setAttribute('ry', '2');
-      });
-      el.addEventListener('mouseleave', () => {
-        hoverCount = Math.max(0, hoverCount - 1);
-        if (hoverCount === 0) {
-          document.body.classList.remove('cursor-hover');
-          smile.setAttribute('d', 'M15 26 Q22 31.5 29 26');
-          eyeL.setAttribute('rx', '2.5'); eyeL.setAttribute('ry', '2.5');
-          eyeR.setAttribute('rx', '2.5'); eyeR.setAttribute('ry', '2.5');
-        }
-      });
-    });
 
     // ── Scroll reveal ────────────────────────────────────────
     const reveals  = document.querySelectorAll('.reveal');
@@ -1093,29 +1018,22 @@
       observer.observe(el);
     });
 
-    // ── Unified RAF loop ─────────────────────────────────────
+    // ── Parallax RAF loop ────────────────────────────────────
     function lerp(a, b, t) { return a + (b - a) * t; }
 
     (function rafLoop() {
       requestAnimationFrame(rafLoop);
 
-      // — Cursor lerp
-      cursorX = lerp(cursorX, mouseX, 0.12);
-      cursorY = lerp(cursorY, mouseY, 0.12);
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top  = cursorY + 'px';
-
-      // — Mouse parallax lerp
       parX = lerp(parX, parRawX, 0.045);
       parY = lerp(parY, parRawY, 0.045);
 
-      // — Hero text: drifts gently with mouse + scrolls up slightly
+      // Hero text: subtle mouse drift + scroll
       if (heroLeft) {
         heroLeft.style.transform =
           `translateY(${-scrollY * 0.07 + parY * -14}px) translateX(${parX * -10}px)`;
       }
 
-      // — Info portrait: drifts upward as section scrolls in
+      // Info portrait: drifts upward as section scrolls in
       if (infoPortrait) {
         const rect = infoPortrait.getBoundingClientRect();
         const rel  = (rect.top + rect.height * 0.5 - window.innerHeight * 0.5) / window.innerHeight;
