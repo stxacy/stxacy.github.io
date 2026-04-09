@@ -174,7 +174,7 @@
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 48px 36px 48px 60px;
       overflow: hidden;
     }
@@ -240,6 +240,158 @@
       background: var(--pink);
       color: #fff;
       transform: translateY(-1px);
+    }
+
+    /* ─── Contact toggle button ─────────────────────────────── */
+    .contact-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 28px;
+      padding: 11px 14px 11px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, border-radius 0.25s;
+      text-align: left;
+    }
+
+    .contact-toggle:hover { background: var(--surface-2); }
+
+    .contact-toggle.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .toggle-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+      line-height: 1;
+      transition: transform 0.35s var(--ease), background 0.2s;
+    }
+
+    .contact-toggle.open .toggle-icon {
+      transform: rotate(45deg);
+      background: var(--pink);
+      color: #fff;
+    }
+
+    /* ─── Collapsible contact form ───────────────────────────── */
+    .contact-form-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s var(--ease);
+    }
+
+    .contact-form-wrap.open { max-height: 440px; }
+
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--text);
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--border-hover); }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--text-muted); }
+
+    .contact-form textarea { height: 80px; }
+
+    .contact-submit {
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .contact-submit:hover { background: var(--pink); color: #fff; transform: translateY(-1px); }
+
+    /* ─── Hero socials block ─────────────────────────────────── */
+    .hero-socials {
+      margin-top: auto;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-socials-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .hero-social-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .hero-social-link:last-child { border-bottom: none; }
+    .hero-social-link:hover { color: var(--text); }
+
+    .hero-social-arrow {
+      font-size: 11px;
+      opacity: 0;
+      transform: translate(-3px, 3px);
+      transition: opacity 0.2s, transform 0.2s var(--ease);
+    }
+
+    .hero-social-link:hover .hero-social-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
     }
 
     /* Small availability badge in hero bottom */
@@ -730,6 +882,7 @@
 
     <!-- Left: compact hero -->
     <div class="hero-col" id="home">
+
       <div class="hero-left">
         <h1 class="hero-title">
           <span class="line"><span>Independent</span></span>
@@ -737,12 +890,45 @@
           <span class="line"><span>&amp; Designer</span></span>
         </h1>
         <p class="hero-tagline">Building brands, products, and experiences that connect — from concept to launch.</p>
-        <a href="mailto:hello@yourname.com" class="hero-cta">
+
+        <!-- Toggle button -->
+        <button class="contact-toggle" id="contactToggle" aria-expanded="false">
           Get in touch
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="toggle-icon" aria-hidden="true">+</span>
+        </button>
+
+        <!-- Collapsible form -->
+        <div class="contact-form-wrap" id="contactFormWrap" aria-hidden="true">
+          <form class="contact-form" onsubmit="handleContact(event)">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Your email" required>
+            <textarea name="message" placeholder="Your message…" required></textarea>
+            <button type="submit" class="contact-submit">
+              Send
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Socials — anchored to bottom via margin-top:auto on .hero-socials -->
+      <div class="hero-socials">
+        <p class="hero-socials-label">Find me on</p>
+        <a href="https://twitter.com/" target="_blank" rel="noopener" class="hero-social-link">
+          X / Twitter <span class="hero-social-arrow">↗</span>
+        </a>
+        <a href="https://dribbble.com/" target="_blank" rel="noopener" class="hero-social-link">
+          Dribbble <span class="hero-social-arrow">↗</span>
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="hero-social-link">
+          Instagram <span class="hero-social-arrow">↗</span>
+        </a>
+        <a href="https://twitch.tv/" target="_blank" rel="noopener" class="hero-social-link">
+          Twitch <span class="hero-social-arrow">↗</span>
         </a>
       </div>
-      <span class="hero-status">Available for projects</span>
+
+      <span class="hero-status" style="padding-top:20px">Available for projects</span>
     </div>
 
     <!-- Right: playground grid -->
@@ -1040,6 +1226,37 @@
         infoPortrait.style.transform = `translateY(${rel * -36}px)`;
       }
     })();
+
+    // ── Contact form toggle ──────────────────────────────────
+    const contactToggle   = document.getElementById('contactToggle');
+    const contactFormWrap = document.getElementById('contactFormWrap');
+
+    contactToggle.addEventListener('click', () => {
+      const open = contactFormWrap.classList.toggle('open');
+      contactToggle.classList.toggle('open', open);
+      contactToggle.setAttribute('aria-expanded', String(open));
+      contactFormWrap.setAttribute('aria-hidden', String(!open));
+      if (open) contactFormWrap.querySelector('input').focus();
+    });
+
+    function handleContact(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.contact-submit');
+      const orig = btn.innerHTML;
+      btn.innerHTML = 'Sent ✓';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+        e.target.reset();
+        contactFormWrap.classList.remove('open');
+        contactToggle.classList.remove('open');
+        contactToggle.setAttribute('aria-expanded', 'false');
+        contactFormWrap.setAttribute('aria-hidden', 'true');
+      }, 2500);
+    }
 
     // ── Nav newsletter ───────────────────────────────────────
     function handleNavSubscribe(e) {
