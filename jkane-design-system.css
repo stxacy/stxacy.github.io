@@ -1,0 +1,231 @@
+/* ============================================================
+   JKANE.CO — Extracted Design System
+   Source: Jordan Jenkins / jkane.co
+   Extracted: 2026-04-15
+   ============================================================ */
+
+
+/* ============================================================
+   PRIMITIVE TOKENS
+   ============================================================ */
+
+:root {
+
+  /* --- COLOR PRIMITIVES --- */
+
+  --color-black:        #000000;
+  --color-dark-900:     #0D0D0D;   /* dark1 — near black */
+  --color-dark-600:     #404040;   /* dark2 — charcoal */
+  --color-gray-500:     #6B7280;   /* Tailwind gray-500 */
+  --color-gray-400:     #9CA3AF;   /* Tailwind gray-400 (dark mode secondary) */
+  --color-neutral-300:  #B2B2B2;   /* light4 — muted / placeholder */
+  --color-neutral-200:  #D9D9D9;   /* light3 — light border */
+  --color-neutral-100:  #F2F2F2;   /* light2 — subtle background */
+  --color-white:        #FFFFFF;   /* light1 */
+  --color-accent:       #FF66EB;   /* Hot pink / fuchsia */
+  --color-accent-10:    rgba(255, 102, 235, 0.10);
+  --color-accent-75:    rgba(255, 102, 235, 0.75);
+
+  /* --- TYPOGRAPHY PRIMITIVES --- */
+
+  --font-sans:          'PPNeueMontreal', sans-serif;
+  --font-sans-medium:   'PPNeueMontreal Medium', sans-serif;
+  --font-mono:          'PPNeueMontrealMono-Book', monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+
+  --font-size-sm:       14px;   /* smallContent */
+  --font-size-base:     16px;   /* subContent */
+  --font-size-lg:       20px;   /* mainContent */
+
+  --line-height-tight:  16.8px;
+  --line-height-snug:   18px;
+  --line-height-snug-alt: 18.4px;
+  --line-height-base:   19.2px;
+  --line-height-relaxed: 23px;
+  --line-height-loose:  24px;
+
+  /* --- SPACING PRIMITIVES --- */
+
+  --space-1:   4px;
+  --space-2:   6px;
+  --space-3:   8px;
+  --space-4:   10px;
+  --space-5:   12px;
+  --space-6:   14px;
+  --space-7:   16px;
+  --space-8:   20px;
+  --space-9:   22px;
+  --space-10:  24px;
+  --space-11:  32px;
+  --space-12:  40px;
+  --space-13:  44px;
+  --space-14:  64px;
+
+  /* --- BORDER RADIUS PRIMITIVES --- */
+
+  --radius-sm:    11px;
+  --radius-md:    12px;   /* rounded-cardInner */
+  --radius-lg:    18px;
+  --radius-xl:    20px;
+  --radius-card:  24px;   /* rounded-card */
+  --radius-full:  9999px;
+
+  /* --- BORDER WIDTH --- */
+
+  --border-width-default: 1px;
+  --border-width-thick:   8px;
+
+  /* --- Z-INDEX SCALE --- */
+
+  --z-below:    1;
+  --z-base:     2;
+  --z-overlay:  100;
+  --z-modal:    9999;
+
+  /* --- TRANSITION PRIMITIVES --- */
+
+  --ease-default:     cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:    100ms;
+  --duration-base:    150ms;
+  --duration-slow:    200ms;
+  --duration-slower:  300ms;
+  --duration-slowest: 500ms;
+}
+
+
+/* ============================================================
+   SEMANTIC TOKENS
+   ============================================================ */
+
+:root {
+
+  /* --- BACKGROUNDS --- */
+
+  --bg-base:        var(--color-dark-900);   /* primary dark background */
+  --bg-surface:     var(--color-neutral-100);
+  --bg-elevated:    var(--color-white);
+  --bg-accent:      var(--color-accent);
+  --bg-accent-soft: var(--color-accent-10);
+
+  /* --- TEXT --- */
+
+  --text-primary:     var(--color-dark-900);
+  --text-secondary:   var(--color-dark-600);
+  --text-muted:       var(--color-neutral-300);
+  --text-on-dark:     var(--color-white);
+  --text-accent:      var(--color-accent);
+
+  /* --- BORDERS --- */
+
+  --border-strong:   var(--color-dark-900);
+  --border-default:  var(--color-dark-600);
+  --border-subtle:   var(--color-neutral-200);
+  --border-faint:    var(--color-neutral-100);
+  --border-accent:   var(--color-accent);
+  --border-muted:    var(--color-neutral-300);   /* hover subdued */
+
+  /* --- TYPOGRAPHY SEMANTIC --- */
+
+  --font-heading:    var(--font-sans-medium);
+  --font-body:       var(--font-sans);
+  --font-code:       var(--font-mono);
+
+  --text-size-small:   var(--font-size-sm);     /* labels, captions */
+  --text-size-body:    var(--font-size-base);   /* body copy */
+  --text-size-content: var(--font-size-lg);     /* main readable content */
+
+  /* --- LAYOUT --- */
+
+  --gutter:       24px;
+  --column-gap:   10px;
+
+  /* --- TRANSITIONS --- */
+
+  --transition-base:      all var(--duration-base) var(--ease-default);
+  --transition-colors:    color, background-color, border-color var(--duration-base) var(--ease-default);
+  --transition-opacity:   opacity var(--duration-base) var(--ease-default);
+  --transition-transform: transform var(--duration-base) var(--ease-default);
+}
+
+/* Responsive gutter + column gap */
+@media (min-width: 768px) {
+  :root {
+    --gutter:     32px;
+    --column-gap: 20px;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --gutter:     64px;
+    --column-gap: 0px;
+  }
+}
+
+
+/* ============================================================
+   COMPONENT TOKENS
+   ============================================================ */
+
+:root {
+
+  /* --- CARD --- */
+
+  --card-radius:          var(--radius-card);      /* 24px */
+  --card-inner-radius:    var(--radius-md);         /* 12px */
+  --card-bg:              var(--bg-elevated);
+  --card-border:          var(--border-subtle);
+
+  /* --- BUTTON (accent) --- */
+
+  --btn-accent-bg:          var(--bg-accent);
+  --btn-accent-bg-hover:    var(--color-accent-75);
+  --btn-accent-text:        var(--color-white);
+  --btn-accent-border:      var(--border-accent);
+  --btn-accent-border-hover: var(--border-accent);
+  --btn-radius:             var(--radius-full);
+
+  /* --- INPUT / FORM --- */
+
+  --input-placeholder:  var(--color-neutral-300);
+  --input-border:       var(--border-subtle);
+  --input-border-focus: var(--border-accent);
+  --input-radius:       var(--radius-md);
+
+  /* --- GRID LAYOUT --- */
+
+  --grid-cols-default: 2;
+  --grid-cols-wide:    3;
+}
+
+
+/* ============================================================
+   UTILITY CLASSES (reference only)
+   ============================================================ */
+
+/*
+  Font utility classes used on jkane.co:
+  .font-regular  → PPNeueMontreal 400
+  .font-medium   → PPNeueMontreal Medium 500
+  .font-mono     → PPNeueMontrealMono-Book
+
+  Text size aliases:
+  .text-smallContent  → 14px
+  .text-subContent    → 16px
+  .text-mainContent   → 20px
+
+  Color aliases used:
+  .text-dark1   .bg-dark1   .border-dark1   → #0D0D0D
+  .text-dark2   .bg-dark2   .border-dark2   → #404040
+  .text-light1  .bg-light1  .border-light1  → #FFFFFF
+  .text-light2  .bg-light2  .border-light2  → #F2F2F2 (bg only)
+  .text-light3  .bg-light3  .border-light3  → #D9D9D9
+  .border-light4 .placeholder:text-light4   → #B2B2B2
+  .text-accent  .bg-accent  .border-accent  → #FF66EB
+
+  Border radius aliases:
+  .rounded-card       → 24px
+  .rounded-cardInner  → 12px
+*/
