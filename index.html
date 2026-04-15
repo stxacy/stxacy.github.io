@@ -118,9 +118,9 @@
     .split-layout {
       display: grid;
       grid-template-columns: 300px 1fr;
-      margin-top: calc(52px + 10px + 8px); /* nav height + nav top + gap */
+      margin-top: calc(52px + 10px + 10px); /* nav height + nav top + 10px gap */
       align-items: start;
-      gap: 8px;
+      gap: 10px;
     }
 
     /* ── Hero column — floating card ───────────────────────────── */
@@ -529,7 +529,7 @@
 
     /* ── Info / About — floating card ───────────────────────────── */
     #info {
-      margin-top: 8px;
+      margin-top: 10px;
       background: var(--bg-base);
       border: var(--border-width-default) solid var(--border-default);
       border-radius: var(--card-radius);
@@ -578,63 +578,11 @@
 
     .info-socials a:hover { color: var(--text-accent); }
 
-    .info-clients-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: var(--space-7);
-    }
-
-    .info-clients-marquee-wrap {
-      overflow: hidden;
-      margin: 0 -60px 0 0;
-    }
-
-    .marquee-wrapper {
-      display: flex;
-      gap: 0;
-      width: max-content;
-      animation: marquee 28s linear infinite;
-    }
-
-    .marquee-wrapper:hover { animation-play-state: paused; }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    .marquee-track {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .client-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 var(--space-11);
-      height: 44px;
-      border-right: var(--border-width-default) solid var(--border-default);
-      opacity: 0.25;
-      transition: opacity var(--duration-slower) var(--ease-default);
-      white-space: nowrap;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .client-logo:hover { opacity: 0.6; }
 
     /* ── Footer — floating card ──────────────────────────────────── */
     footer {
-      margin-top: 8px;
-      margin-bottom: 2px;
+      margin-top: 10px;
+      margin-bottom: 0;
       padding: var(--space-9) var(--space-12);
       display: flex;
       align-items: center;
@@ -1057,35 +1005,6 @@
         <a href="#">Discord</a>
       </div>
 
-      <p class="info-clients-label reveal">Selected clients</p>
-      <div class="info-clients-marquee-wrap reveal">
-        <div class="marquee-wrapper">
-          <div class="marquee-track">
-            <span class="client-logo">Walmart</span>
-            <span class="client-logo">Under Armour</span>
-            <span class="client-logo">Google</span>
-            <span class="client-logo">Riot Games</span>
-            <span class="client-logo">Snapchat</span>
-            <span class="client-logo">Marriott</span>
-            <span class="client-logo">Discord</span>
-            <span class="client-logo">Huel</span>
-            <span class="client-logo">Solana</span>
-            <span class="client-logo">Khan Academy</span>
-          </div>
-          <div class="marquee-track" aria-hidden="true">
-            <span class="client-logo">Walmart</span>
-            <span class="client-logo">Under Armour</span>
-            <span class="client-logo">Google</span>
-            <span class="client-logo">Riot Games</span>
-            <span class="client-logo">Snapchat</span>
-            <span class="client-logo">Marriott</span>
-            <span class="client-logo">Discord</span>
-            <span class="client-logo">Huel</span>
-            <span class="client-logo">Solana</span>
-            <span class="client-logo">Khan Academy</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
