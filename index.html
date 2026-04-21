@@ -23,7 +23,13 @@
 
     body {
       font-family: var(--font-body);
-      background: #06080a;
+      background-color: #06080a;
+      background-image:
+        linear-gradient(rgba(6,8,10,0.48), rgba(6,8,10,0.48)),
+        url('assets/images/ambient.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: var(--text-on-dark);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -31,17 +37,6 @@
       padding-left: max(10px, env(safe-area-inset-left));
       padding-right: max(10px, env(safe-area-inset-right));
       padding-bottom: max(10px, env(safe-area-inset-bottom));
-    }
-
-    /* ── Ambient background ────────────────────────────────────── */
-    .bg-parallax {
-      position: fixed;
-      inset: 0;
-      background: url('assets/images/ambient.png') center 50% / cover no-repeat;
-      opacity: 0.55;
-      z-index: -1;
-
-      pointer-events: none;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -764,9 +759,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Ambient background -->
-  <div class="bg-parallax" id="bgParallax" aria-hidden="true"></div>
 
   <!-- Page loader -->
   <div class="page-loader" aria-hidden="true"></div>
