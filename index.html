@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>STXACY</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,10 @@
       color: var(--text-on-dark);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      padding: 10px;
       padding-top: 0;
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
 
     /* ── Ambient background ────────────────────────────────────── */
@@ -59,9 +61,9 @@
     /* ── Navigation — floating pill ────────────────────────────── */
     nav {
       position: fixed;
-      top: 10px;
-      left: 10px;
-      right: 10px;
+      top: calc(10px + env(safe-area-inset-top));
+      left: max(10px, env(safe-area-inset-left));
+      right: max(10px, env(safe-area-inset-right));
       width: auto;
       z-index: var(--z-modal);
       display: flex;
@@ -131,7 +133,7 @@
     .split-layout {
       display: grid;
       grid-template-columns: 300px 1fr;
-      margin-top: calc(52px + 10px + 10px); /* nav height + nav top + 10px gap */
+      margin-top: calc(52px + env(safe-area-inset-top) + 20px);
       align-items: start;
       gap: 10px;
     }
@@ -139,8 +141,8 @@
     /* ── Hero column — floating card ───────────────────────────── */
     .hero-col {
       position: sticky;
-      top: calc(52px + 10px + 8px);
-      height: calc(100vh - 52px - 10px - 8px - 8px); /* subtract nav + gaps + bottom pad */
+      top: calc(52px + env(safe-area-inset-top) + 18px);
+      height: calc(100vh - 52px - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 26px);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -737,7 +739,7 @@
 
     @media (max-width: 900px) {
       body { padding: 8px; padding-top: 0; }
-      nav { padding: 0 var(--space-8); left: 8px; right: 8px; top: 8px; }
+      nav { padding: 0 var(--space-8); left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); top: calc(8px + env(safe-area-inset-top)); }
       section { padding: 56px var(--space-9); }
 
       .split-layout { grid-template-columns: 1fr; }
