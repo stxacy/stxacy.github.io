@@ -943,25 +943,17 @@
       observer.observe(el);
     });
 
-    // ── Playground load-in parallax ──────────────────────────────
-    document.querySelectorAll('.pg-item:not(.pg-spacer)').forEach((el, i) => {
-      el.classList.remove('reveal');
-      el.classList.add('par-item');
-      el.style.setProperty('--pd', `${0.32 + i * 0.042}s`);
-    });
-
-    const pgHeader = document.querySelector('.playground-header');
-    if (pgHeader) {
-      pgHeader.classList.remove('reveal');
-      pgHeader.classList.add('par-item');
-      pgHeader.style.setProperty('--pd', '0.26s');
-      pgHeader.style.setProperty('--py', '16px');
-      pgHeader.style.setProperty('--ps', '1');
-    }
-
     // ── Fire after loader bar (0.48s) ────────────────────────────
     setTimeout(() => {
-      requestAnimationFrame(() => document.body.classList.add('loaded'));
+      requestAnimationFrame(() => {
+        document.body.classList.add('loaded');
+        // Immediately show any reveal items already in the viewport
+        reveals.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('visible');
+          }
+        });
+      });
     }, 480);
 
     // ── Tile repulsion ───────────────────────────────────────────
@@ -970,15 +962,6 @@
 
       const tiles = [...document.querySelectorAll('.pg-item:not(.pg-spacer)')];
       let hoveredIdx = -1;
-
-      tiles.forEach((el, i) => {
-        const ms = 480 + (0.32 + i * 0.042) * 1000 + 1150;
-        setTimeout(() => {
-          el.classList.remove('par-item');
-          ['--pd', '--py', '--ps'].forEach(p => el.style.removeProperty(p));
-        }, ms);
-      });
-
       const rep = tiles.map(() => ({ tx: 0, ty: 0, cx: 0, cy: 0 }));
 
       tiles.forEach((tile, i) => {
@@ -1011,10 +994,8 @@
         tiles.forEach((tile, i) => {
           rep[i].cx = lerp2(rep[i].cx, rep[i].tx, 0.09);
           rep[i].cy = lerp2(rep[i].cy, rep[i].ty, 0.09);
-          if (!tile.classList.contains('par-item')) {
-            tile.style.transform =
-              `translate(${rep[i].cx.toFixed(2)}px, ${rep[i].cy.toFixed(2)}px)`;
-          }
+          tile.style.transform =
+            `translate(${rep[i].cx.toFixed(2)}px, ${rep[i].cy.toFixed(2)}px)`;
         });
       })();
     })();
