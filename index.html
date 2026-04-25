@@ -124,251 +124,8 @@
     .nav-links a:hover { color: var(--text-on-dark); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ── Split layout ───────────────────────────────────────────── */
-    .split-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      margin-top: calc(52px + env(safe-area-inset-top) + 20px);
-      align-items: start;
-      gap: 10px;
-    }
 
-    /* ── Hero column — floating card ───────────────────────────── */
-    .hero-col {
-      position: sticky;
-      top: calc(52px + env(safe-area-inset-top) + 18px);
-      height: calc(100vh - 52px - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 26px);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: var(--space-12) var(--space-11) var(--space-12) var(--space-12);
-      overflow-y: auto;
-      overflow-x: hidden;
-      background: rgba(10,10,12,0.62);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: var(--border-width-default) solid var(--border-default);
-      border-radius: var(--card-radius);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04) inset;
-    }
 
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(22px, 2vw, 32px);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      margin-bottom: var(--space-10);
-      color: var(--text-on-dark);
-    }
-
-    .hero-title .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
-    .hero-title .line span {
-      display: block;
-      transform: translateY(110%);
-      transition: transform 1.0s var(--ease-default);
-    }
-
-    body.loaded .hero-title .line:nth-child(1) span { transform: translateY(0); transition-delay: 0.48s; }
-    body.loaded .hero-title .line:nth-child(2) span { transform: translateY(0); transition-delay: 0.56s; }
-    body.loaded .hero-title .line:nth-child(3) span { transform: translateY(0); transition-delay: 0.64s; }
-
-    /* Accent word */
-    .hero-title .accent-word { color: var(--text-accent); }
-
-    .hero-tagline {
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-regular);
-      color: var(--text-muted);
-      line-height: var(--line-height-relaxed);
-      margin-bottom: var(--space-11);
-    }
-
-    /* ── Contact toggle ─────────────────────────────────────────── */
-    .contact-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: var(--space-4) var(--space-6) var(--space-4) var(--space-7);
-      background: transparent;
-      border: var(--border-width-default) solid var(--border-default);
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      font-family: var(--font-body);
-      color: var(--text-on-dark);
-      cursor: pointer;
-      transition:
-        background var(--duration-slow) var(--ease-default),
-        border-color var(--duration-slow) var(--ease-default),
-        border-radius var(--duration-slow) var(--ease-default);
-      text-align: left;
-    }
-
-    .contact-toggle:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--border-muted);
-    }
-
-    .contact-toggle.open {
-      border-color: var(--border-accent);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      background: var(--bg-accent-soft);
-    }
-
-    .toggle-icon {
-      width: 20px; height: 20px;
-      border-radius: var(--radius-full);
-      background: var(--color-accent);
-      color: var(--color-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 14px;
-      line-height: 1;
-      transition: transform var(--duration-slower) var(--ease-default), background var(--duration-slow) var(--ease-default);
-    }
-
-    .contact-toggle.open .toggle-icon {
-      transform: rotate(45deg);
-      background: var(--color-accent-75);
-    }
-
-    /* ── Contact form ────────────────────────────────────────────── */
-    .contact-form-wrap {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.45s var(--ease-default);
-    }
-
-    .contact-form-wrap.open { max-height: 440px; }
-
-    .contact-form {
-      background: rgba(255,255,255,0.03);
-      border: var(--border-width-default) solid var(--border-accent);
-      border-top: none;
-      border-radius: 0 0 var(--input-radius) var(--input-radius);
-      padding: var(--space-6);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      background: rgba(255,255,255,0.05);
-      border: var(--border-width-default) solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: var(--space-4) var(--space-5);
-      font-family: var(--font-body);
-      font-size: var(--font-size-sm);
-      color: var(--text-on-dark);
-      outline: none;
-      width: 100%;
-      transition: border-color var(--duration-slow) var(--ease-default);
-      resize: none;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--input-border-focus);
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: var(--input-placeholder);
-    }
-
-    .contact-form textarea { height: 72px; }
-
-    .contact-submit {
-      align-self: flex-end;
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-3) var(--space-9);
-      background: var(--btn-accent-bg);
-      color: var(--btn-accent-text);
-      border: none;
-      border-radius: var(--btn-radius);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      font-family: var(--font-body);
-      cursor: pointer;
-      transition: background var(--duration-slow) var(--ease-default), transform var(--duration-fast) var(--ease-default);
-    }
-
-    .contact-submit:hover {
-      background: var(--btn-accent-bg-hover);
-      transform: translateY(-1px);
-    }
-
-    /* ── Hero socials ────────────────────────────────────────────── */
-    .hero-socials {
-      margin-top: auto;
-      padding-top: var(--space-8);
-      border-top: var(--border-width-default) solid var(--border-default);
-    }
-
-    .hero-socials-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: var(--space-2);
-    }
-
-    .hero-social-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-4) 0;
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      color: var(--text-muted);
-      border-bottom: var(--border-width-default) solid var(--border-default);
-      transition: color var(--duration-slow) var(--ease-default);
-    }
-
-    .hero-social-link:last-child { border-bottom: none; }
-    .hero-social-link:hover { color: var(--text-on-dark); }
-
-    .hero-social-arrow {
-      font-size: 11px;
-      opacity: 0;
-      transform: translate(-3px, 3px);
-      transition: opacity var(--duration-slow) var(--ease-default), transform var(--duration-slow) var(--ease-default);
-      color: var(--text-accent);
-    }
-
-    .hero-social-link:hover .hero-social-arrow {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-
-    .hero-status {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding-top: var(--space-7);
-    }
-
-    .hero-status::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: var(--radius-full);
-      background: #22c55e;
-      animation: pulse 2s ease-in-out infinite;
-    }
 
     /* ── Section base ────────────────────────────────────────────── */
     section { padding: 100px var(--space-12); }
@@ -397,7 +154,8 @@
 
     /* ── Playground column — floating card ─────────────────────── */
     .playground-col {
-      padding: var(--space-12) var(--space-12) 80px var(--space-11);
+      margin-top: calc(52px + env(safe-area-inset-top) + 20px);
+      padding: var(--space-12) var(--space-12) 80px;
       min-height: calc(100vh - 52px - 10px - 16px);
       background: rgba(10,10,12,0.62);
       backdrop-filter: blur(24px);
@@ -717,8 +475,6 @@
 
     /* ── Reduced motion ──────────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
-      .hero-title .line span { transition: none; transform: none; }
-      .marquee-wrapper { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .par-item, .hero-par { opacity: 1 !important; transform: none !important; transition: none !important; }
       .page-loader { display: none !important; }
@@ -726,32 +482,15 @@
     }
 
     /* ── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .split-layout { grid-template-columns: 260px 1fr; }
-      .hero-col { padding: var(--space-11) var(--space-9) var(--space-11) var(--space-11); }
-      .playground-col { padding: var(--space-11) var(--space-11) 80px var(--space-9); }
-    }
-
     @media (max-width: 900px) {
       body { padding: 8px; padding-top: 0; }
       nav { padding: 0 var(--space-8); left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); top: calc(8px + env(safe-area-inset-top)); }
-      section { padding: 56px var(--space-9); }
-
-      .split-layout { grid-template-columns: 1fr; }
-      .hero-col {
-        position: static;
-        height: auto;
-        border-radius: var(--card-radius);
-        padding: var(--space-11) var(--space-9) var(--space-11);
-      }
       .playground-col { padding: var(--space-11) var(--space-9) 60px; }
       .playground-grid { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; align-items: flex-start; padding: var(--space-9); }
-      .contact-toggle, .hero-socials { display: none; }
     }
 
     @media (max-width: 600px) {
-      .hero-title { font-size: clamp(22px, 6.5vw, 30px); }
       .playground-grid { grid-template-columns: 1fr 1fr; }
       .pg-item.span-2 { grid-column: span 2; }
       .nav-links { gap: var(--space-8); }
@@ -774,59 +513,8 @@
     </ul>
   </nav>
 
-  <!-- Split layout: hero col + playground col -->
-  <div class="split-layout">
-
-    <!-- Left: sticky hero -->
-    <div class="hero-col" id="home">
-
-      <div class="hero-left">
-        <h1 class="hero-title">
-          <span class="line"><span>Digital Experience</span></span>
-          <span class="line"><span>Designer &amp; <span class="accent-word">AI</span></span></span>
-          <span class="line"><span>Powered Creative</span></span>
-        </h1>
-        <p class="hero-tagline hero-par" style="--pd:0.72s">Building brands, products, and experiences that connect — from concept to launch.</p>
-
-        <!-- Contact toggle -->
-        <button class="contact-toggle hero-par" id="contactToggle" aria-expanded="false" style="--pd:0.80s; --py:18px">
-          Get in touch
-          <span class="toggle-icon" aria-hidden="true">+</span>
-        </button>
-
-        <!-- Collapsible form -->
-        <div class="contact-form-wrap" id="contactFormWrap" aria-hidden="true">
-          <form class="contact-form" onsubmit="handleContact(event)">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <textarea name="message" placeholder="Your message…" required></textarea>
-            <button type="submit" class="contact-submit">
-              Send
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Socials — pushed to bottom -->
-      <div class="hero-socials hero-par" style="--pd:0.92s; --py:14px">
-        <p class="hero-socials-label">Find me on</p>
-        <a href="https://dribbble.com/" target="_blank" rel="noopener" class="hero-social-link">
-          Dribbble <span class="hero-social-arrow">↗</span>
-        </a>
-        <a href="https://www.instagram.com/stxacy/" target="_blank" rel="noopener" class="hero-social-link">
-          Instagram <span class="hero-social-arrow">↗</span>
-        </a>
-        <a href="https://discord.com/" target="_blank" rel="noopener" class="hero-social-link">
-          Discord <span class="hero-social-arrow">↗</span>
-        </a>
-      </div>
-
-      <span class="hero-status hero-par" style="--pd:1.02s; --py:10px">Available for projects</span>
-    </div>
-
-    <!-- Right: playground grid -->
-    <div class="playground-col" id="playground">
+  <!-- Work grid -->
+  <div class="playground-col" id="playground">
       <div class="playground-header reveal">
         <div class="section-label" style="margin-bottom:0; counter-increment: none;">Work</div>
         <a href="#" class="btn-outline">View all ↗</a>
@@ -903,7 +591,6 @@
 
       </div>
     </div><!-- /playground-col -->
-  </div><!-- /split-layout -->
 
   <!-- Footer -->
   <footer>
@@ -1000,37 +687,6 @@
       })();
     })();
 
-    // ── Contact form toggle ──────────────────────────────────────
-    const contactToggle   = document.getElementById('contactToggle');
-    const contactFormWrap = document.getElementById('contactFormWrap');
-
-    contactToggle.addEventListener('click', () => {
-      const open = contactFormWrap.classList.toggle('open');
-      contactToggle.classList.toggle('open', open);
-      contactToggle.setAttribute('aria-expanded', String(open));
-      contactFormWrap.setAttribute('aria-hidden', String(!open));
-      if (open) {
-        const firstInput = contactFormWrap.querySelector('input');
-        if (firstInput) firstInput.focus();
-      }
-    });
-
-    function handleContact(e) {
-      e.preventDefault();
-      const btn  = e.target.querySelector('.contact-submit');
-      const orig = btn.innerHTML;
-      btn.innerHTML = 'Sent';
-      btn.style.background = '#22c55e';
-      setTimeout(() => {
-        btn.innerHTML = orig;
-        btn.style.background = '';
-        e.target.reset();
-        contactFormWrap.classList.remove('open');
-        contactToggle.classList.remove('open');
-        contactToggle.setAttribute('aria-expanded', 'false');
-        contactFormWrap.setAttribute('aria-hidden', 'true');
-      }, 2500);
-    }
   </script>
 </body>
 </html>
