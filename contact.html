@@ -600,7 +600,7 @@
 
       <div class="section-label reveal">Contact</div>
 
-      <form class="full-form" onsubmit="handleContact(event)">
+      <form class="full-form" id="contactForm" action="https://formspree.io/f/mwvajpbo" method="POST" onsubmit="handleContact(event)">
         <div class="form-row">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Your email" required>
@@ -661,17 +661,40 @@
     }, 480);
 
     // ── Contact form ──────────────────────────────────────────────
-    function handleContact(e) {
+    async function handleContact(e) {
       e.preventDefault();
-      const btn  = e.target.querySelector('.contact-submit');
+      const form = e.target;
+      const btn  = form.querySelector('.contact-submit');
       const orig = btn.innerHTML;
-      btn.innerHTML = 'Sent';
-      btn.style.background = '#22c55e';
+
+      btn.innerHTML = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/mwvajpbo', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          btn.innerHTML = 'Sent ✓';
+          btn.style.background = '#22c55e';
+          form.reset();
+        } else {
+          btn.innerHTML = 'Failed — try again';
+          btn.style.background = '#ef4444';
+        }
+      } catch {
+        btn.innerHTML = 'Failed — try again';
+        btn.style.background = '#ef4444';
+      }
+
       setTimeout(() => {
         btn.innerHTML = orig;
         btn.style.background = '';
-        e.target.reset();
-      }, 2500);
+        btn.disabled = false;
+      }, 3000);
     }
   </script>
 </body>
