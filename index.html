@@ -459,12 +459,16 @@
       nav { padding: 0 var(--space-8); left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); top: calc(8px + env(safe-area-inset-top)); }
       .playground-col { padding: var(--space-11) var(--space-9) 60px; }
       .playground-grid { grid-template-columns: repeat(2, 1fr); }
+      /* Fallback height for items with no explicit aspect-ratio class */
+      .pg-item { aspect-ratio: 4/3; }
+      .pg-item.span-2 { grid-column: span 2; aspect-ratio: 16/9; }
       footer { flex-direction: column; align-items: flex-start; padding: var(--space-9); }
     }
 
     @media (max-width: 600px) {
       .playground-grid { grid-template-columns: 1fr 1fr; }
-      .pg-item.span-2 { grid-column: span 2; }
+      .pg-item { aspect-ratio: 1/1; }
+      .pg-item.span-2 { grid-column: span 2; aspect-ratio: 16/9; }
       .nav-links { gap: var(--space-8); }
     }
   </style>
