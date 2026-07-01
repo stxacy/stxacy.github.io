@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Get in Touch — STXACY | Vik Rathore</title>
   <meta name="description" content="Get in touch with Vik Rathore (STXACY) — open to UX/UI design, web development, and brand identity projects. Based in London, working worldwide.">
+  <link rel="icon" type="image/png" sizes="32x32" href="stxacylogos/pack/stxacy-favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="stxacylogos/pack/stxacy-favicon-512.png">
+  <link rel="apple-touch-icon" href="stxacylogos/pack/stxacy-favicon-512.png">
+  <meta property="og:title" content="Get in Touch — STXACY | Vik Rathore">
+  <meta property="og:description" content="Open to UX/UI design, web development, and brand identity projects. Based in London, working worldwide.">
+  <meta property="og:image" content="https://stxacy.com/stxacylogos/pack/stxacy-lockup-dark.png">
+  <meta property="og:url" content="https://stxacy.com/contact">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://stxacy.com/stxacylogos/pack/stxacy-lockup-dark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
@@ -93,6 +103,16 @@
     }
 
     .nav-logo .dot { color: var(--text-accent); }
+
+    .nav-wordmark {
+      height: 26px;
+      width: auto;
+      display: block;
+      opacity: 0.85;
+      transition: opacity var(--duration-slow) var(--ease-default);
+    }
+
+    .nav-logo:hover .nav-wordmark { opacity: 1; }
 
     .nav-links {
       display: flex;
@@ -465,31 +485,50 @@
       50%       { opacity: 0.4; transform: scale(0.8); }
     }
 
-    /* ── Page loader ──────────────────────────────────────────────── */
-    .page-loader {
+    /* ── Splash ───────────────────────────────────────────────────── */
+    .splash {
       position: fixed;
       inset: 0;
-      background: var(--bg-base);
-      z-index: 9999;
-      pointer-events: none;
-      will-change: transform;
+      z-index: 10000;
+      background: #06080a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .page-loader::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      height: 1px; width: 0;
-      background: var(--color-accent);
-      animation: loaderBar 0.48s var(--ease-default) forwards;
+    .splash-logo-wrap { perspective: 1200px; }
+
+    .splash-logo {
+      width: min(260px, 52vw);
+      height: auto;
+      display: block;
+      animation: wordmarkSpin 9s linear infinite;
     }
 
-    @keyframes loaderBar { to { width: 100%; } }
-
-    body.loaded .page-loader {
-      transform: translateY(-100%);
-      transition: transform 0.9s var(--ease-default) 0.05s;
+    @keyframes wordmarkSpin {
+      from { transform: rotateY(0deg) rotateX(5deg); }
+      to   { transform: rotateY(360deg) rotateX(5deg); }
     }
+
+    .splash-hint {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @keyframes splashOut {
+      to { opacity: 0; pointer-events: none; }
+    }
+
+    .splash.out { animation: splashOut 0.5s ease forwards; }
+
+    body:not(.loaded) { overflow: hidden; }
 
     body.loaded nav {
       transform: translateY(0) !important;
@@ -524,7 +563,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       .hero-par { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .page-loader { display: none !important; }
+      .splash { display: none !important; }
       nav { transform: none !important; opacity: 1 !important; transition: none !important; }
     }
 
@@ -553,10 +592,15 @@
 </head>
 <body>
 
-  <div class="page-loader" aria-hidden="true"></div>
+  <div class="splash" id="splash">
+    <div class="splash-logo-wrap">
+      <img src="stxacylogos/pack/stxacy-wordmark-white-transparent.png" alt="STXACY" class="splash-logo">
+    </div>
+    <span class="splash-hint">Click anywhere to enter</span>
+  </div>
 
   <nav id="mainNav">
-    <a href="/" class="nav-logo">STXACY</a>
+    <a href="/" class="nav-logo"><img src="stxacylogos/pack/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark"></a>
     <ul class="nav-links">
       <li><a href="info">Info</a></li>
       <li><a href="/">Work</a></li>
@@ -653,9 +697,29 @@
       observer.observe(el);
     });
 
-    setTimeout(() => {
-      requestAnimationFrame(() => document.body.classList.add('loaded'));
-    }, 480);
+    // ── Splash ───────────────────────────────────────────────────
+    const splash = document.getElementById('splash');
+
+    const hasEntered = sessionStorage.getItem('stxacy_entered');
+
+    function enterSite() {
+      sessionStorage.setItem('stxacy_entered', '1');
+      splash.classList.add('out');
+      setTimeout(() => {
+        requestAnimationFrame(() => document.body.classList.add('loaded'));
+      }, 80);
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      splash.style.display = 'none';
+      document.body.classList.add('loaded');
+    } else if (hasEntered) {
+      document.querySelector('.splash-hint').style.display = 'none';
+      setTimeout(enterSite, 700);
+    } else {
+      splash.addEventListener('click', enterSite, { once: true });
+      splash.addEventListener('touchend', (e) => { e.preventDefault(); enterSite(); }, { once: true });
+    }
 
     // ── Contact form ──────────────────────────────────────────────
     async function handleContact(e) {
