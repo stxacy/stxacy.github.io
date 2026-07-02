@@ -50,6 +50,15 @@
 
     .cursor { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background: var(--paper); border-radius: 50%; pointer-events: none; z-index: 9999; will-change: transform; mix-blend-mode: difference; }
 
+    body:not(.loaded) { overflow: hidden; }
+    .splash { position: fixed; inset: 0; z-index: 10000; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; cursor: pointer; user-select: none; }
+    .splash-logo-wrap { perspective: 1200px; }
+    .splash-logo { width: min(260px, 52vw); height: auto; display: block; animation: wordmarkSpin 9s linear infinite; }
+    @keyframes wordmarkSpin { from { transform: rotateY(0deg) rotateX(5deg); } to { transform: rotateY(360deg) rotateX(5deg); } }
+    .splash-hint { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,242,239,0.3); }
+    @keyframes splashOut { to { opacity: 0; pointer-events: none; } }
+    .splash.out { animation: splashOut 0.5s ease forwards; }
+
     nav { position: fixed; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); right: max(16px, env(safe-area-inset-right)); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 52px; background: rgba(11,11,11,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--hairline-dark); border-radius: 14px; opacity: 0; transform: translateY(calc(-100% - 20px)); }
     body.loaded nav { opacity: 1; transform: translateY(0); transition: transform 0.75s var(--ease-out) 0.1s, opacity 0.5s ease 0.1s; }
     .nav-logo { flex-shrink: 0; display: flex; align-items: center; }
@@ -162,6 +171,12 @@
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
+  <div class="splash" id="splash">
+    <div class="splash-logo-wrap">
+      <img src="/assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="splash-logo">
+    </div>
+    <span class="splash-hint">Click anywhere to enter</span>
+  </div>
   <nav id="mainNav">
     <a href="/" class="nav-logo"><img src="/assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark"></a>
     <ul class="nav-links">
@@ -241,7 +256,23 @@
     const cursorEl = document.getElementById('cursor');
     let cx = 0, cy = 0, tx = window.innerWidth / 2, ty = window.innerHeight / 2, cursorScale = 1;
     document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-    document.body.classList.add('loaded');
+    const splash = document.getElementById('splash');
+    const hasEntered = sessionStorage.getItem('stxacy_entered');
+    function enterSite() {
+      sessionStorage.setItem('stxacy_entered', '1');
+      splash.classList.add('out');
+      setTimeout(() => { document.body.classList.add('loaded'); }, 80);
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      splash.style.display = 'none';
+      document.body.classList.add('loaded');
+    } else if (hasEntered) {
+      splash.querySelector('.splash-hint').style.display = 'none';
+      setTimeout(enterSite, 700);
+    } else {
+      splash.addEventListener('click', enterSite, { once: true });
+      splash.addEventListener('touchend', e => { e.preventDefault(); enterSite(); }, { once: true });
+    }
     const scrollFrame = document.getElementById('scrollFrame');
     const scroller = document.getElementById('scroller');
     let scrollTarget = 0, scrollCurrent = 0;

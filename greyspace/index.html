@@ -557,6 +557,12 @@
 <body>
 
   <div class="cursor" id="cursor"></div>
+  <div class="splash" id="splash">
+    <div class="splash-logo-wrap">
+      <img src="/assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="splash-logo">
+    </div>
+    <span class="splash-hint">Click anywhere to enter</span>
+  </div>
 
   <!-- Nav -->
   <nav id="mainNav">
@@ -665,9 +671,9 @@
             <p class="cs-next-label">← Back</p>
             <p class="cs-next-name">All Work</p>
           </a>
-          <a href="https://kingscotehaulage.co.uk/" target="_blank" rel="noopener">
+          <a href="/kingscote">
             <p class="cs-next-label">Next Project</p>
-            <p class="cs-next-name">Kingscote Haulage ↗</p>
+            <p class="cs-next-name">Kingscote Haulage →</p>
           </a>
         </div>
 
@@ -699,7 +705,23 @@
     document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
 
     // ── Load ────────────────────────────────────────────────────
-    document.body.classList.add('loaded');
+    const splash = document.getElementById('splash');
+    const hasEntered = sessionStorage.getItem('stxacy_entered');
+    function enterSite() {
+      sessionStorage.setItem('stxacy_entered', '1');
+      splash.classList.add('out');
+      setTimeout(() => { document.body.classList.add('loaded'); }, 80);
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      splash.style.display = 'none';
+      document.body.classList.add('loaded');
+    } else if (hasEntered) {
+      splash.querySelector('.splash-hint').style.display = 'none';
+      setTimeout(enterSite, 700);
+    } else {
+      splash.addEventListener('click', enterSite, { once: true });
+      splash.addEventListener('touchend', e => { e.preventDefault(); enterSite(); }, { once: true });
+    }
 
     // ── Momentum scroll (desktop only) ──────────────────────────
     const scrollFrame = document.getElementById('scrollFrame');
