@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>PSR London — Case Study | STXACY</title>
-  <meta name="description" content="Case study: PSR London — luxury car marketplace designed and developed by Vik Rathore (STXACY).">
-  <link rel="canonical" href="https://stxacy.com/psr">
-  <meta property="og:title" content="PSR London — Case Study | STXACY">
-  <meta property="og:description" content="PSR London luxury car marketplace, designed and developed by Vik Rathore.">
-  <meta property="og:image" content="https://stxacy.com/assets/images/psrlondonsplash.png">
-  <meta property="og:url" content="https://stxacy.com/psr">
+  <title>Surf Coast CC — Case Study | STXACY</title>
+  <meta name="description" content="Case study: Surf Coast Cricket Club — web presence designed and developed by Vik Rathore (STXACY).">
+  <link rel="canonical" href="https://stxacy.com/surfcoast">
+  <meta property="og:title" content="Surf Coast CC — Case Study | STXACY">
+  <meta property="og:description" content="Web presence for Surf Coast Cricket Club, designed and developed by Vik Rathore.">
+  <meta property="og:image" content="https://stxacy.com/assets/images/surf-coast-suns.png">
+  <meta property="og:url" content="https://stxacy.com/surfcoast">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://stxacy.com/assets/images/psrlondonsplash.png">
+  <meta name="twitter:image" content="https://stxacy.com/assets/images/surf-coast-suns.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "name": "PSR London — Luxury Car Marketplace",
-    "description": "Vetted luxury car marketplace designed and developed by Vik Rathore (STXACY).",
-    "url": "https://stxacy.com/psr-london/",
+    "name": "Surf Coast Cricket Club — Website",
+    "description": "Web presence for Surf Coast Cricket Club, designed and developed by Vik Rathore (STXACY).",
+    "url": "https://stxacy.github.io/SCCC",
     "creator": { "@type": "Person", "name": "Vik Rathore", "url": "https://stxacy.com" }
   }
   </script>
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/stxacy-favicon-32.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/stxacy-favicon-512.png">
-  <link rel="apple-touch-icon" href="assets/images/stxacy-favicon-512.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/stxacy-favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/stxacy-favicon-512.png">
+  <link rel="apple-touch-icon" href="/assets/images/stxacy-favicon-512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@900&family=Space+Grotesk:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
@@ -36,8 +36,7 @@
       --paper:         #F2F2EF;
       --muted-dark:    #8A8A82;
       --hairline-dark: #2A2A26;
-      --accent:        #080808;
-      --gold:          #C9A96E;
+      --accent:        #232323;
       --font-display:   'Anton', sans-serif;
       --font-editorial: 'Archivo', sans-serif;
       --font-body:      'Space Grotesk', sans-serif;
@@ -67,24 +66,17 @@
     .main { padding-top: calc(52px + 40px); padding-bottom: clamp(80px, 10vw, 160px); opacity: 0; transform: translateY(16px); transition: opacity 0.8s var(--ease-out) 0.15s, transform 0.8s var(--ease-out) 0.15s; }
     body.loaded .main { opacity: 1; transform: translateY(0); }
 
-    /* Hero — black with gold treatment */
-    .cs-header { padding: var(--pad); padding-top: calc(var(--pad) + 16px); padding-bottom: clamp(40px, 5vw, 72px); display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(32px, 5vw, 80px); min-height: 52vh; background: var(--accent); border-bottom: 1px solid rgba(201,169,110,0.2); margin-bottom: clamp(48px, 6vw, 88px); }
+    /* Hero */
+    .cs-header { padding: var(--pad); padding-top: calc(var(--pad) + 16px); padding-bottom: clamp(40px, 5vw, 72px); display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(32px, 5vw, 80px); min-height: 52vh; background: var(--accent); margin-bottom: clamp(48px, 6vw, 88px); }
     .cs-header-text { flex: 1; min-width: 0; }
+    .cs-hero-logo { flex-shrink: 0; width: clamp(140px, 20vw, 280px); height: auto; display: block; align-self: center; }
 
-    .cs-hero-logo {
-      flex-shrink: 0;
-      width: clamp(160px, 22vw, 320px);
-      height: auto;
-      display: block;
-      align-self: center;
-    }
-
-    .cs-back { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,169,110,0.5); display: inline-flex; align-items: center; gap: 8px; margin-bottom: clamp(32px, 4vw, 56px); transition: color 0.3s ease; }
-    .cs-back:hover { color: var(--gold); }
-    .cs-number { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(201,169,110,0.5); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-    .cs-number::before { content: ''; display: block; width: 20px; height: 1px; background: rgba(201,169,110,0.25); }
+    .cs-back { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); display: inline-flex; align-items: center; gap: 8px; margin-bottom: clamp(32px, 4vw, 56px); transition: color 0.3s ease; }
+    .cs-back:hover { color: #fff; }
+    .cs-number { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .cs-number::before { content: ''; display: block; width: 20px; height: 1px; background: rgba(255,255,255,0.3); }
     .cs-title { font-family: var(--font-display); font-size: clamp(64px, 10vw, 160px); line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; color: #fff; margin-bottom: clamp(20px, 2.5vw, 32px); }
-    .cs-descriptor { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(201,169,110,0.5); }
+    .cs-descriptor { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 
     /* Meta */
     .cs-meta { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--hairline-dark); border-bottom: 1px solid var(--hairline-dark); margin: 0 var(--pad); }
@@ -113,17 +105,19 @@
     /* CTA */
     .cs-cta { padding: clamp(40px, 5vw, 72px) var(--pad); border-top: 1px solid var(--hairline-dark); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
     .cs-cta-text { font-family: var(--font-editorial); font-weight: 900; font-size: clamp(22px, 2.8vw, 40px); letter-spacing: -0.025em; color: var(--paper); }
-    .cs-cta-btn { font-family: var(--font-display); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 18px 36px; display: inline-flex; align-items: center; position: relative; overflow: hidden; transition: color 0.3s ease; text-decoration: none; }
+    .cs-cta-btn { font-family: var(--font-display); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); background: var(--paper); padding: 18px 36px; display: inline-flex; align-items: center; position: relative; overflow: hidden; transition: color 0.3s ease; text-decoration: none; }
     .cs-cta-btn::after { content: ''; position: absolute; inset: 0; background: var(--surface); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(.76,0,.24,1); }
-    .cs-cta-btn:hover { color: var(--gold); }
+    .cs-cta-btn:hover { color: var(--paper); }
     .cs-cta-btn:hover::after { transform: translateX(0); }
     .cs-cta-btn span { position: relative; z-index: 1; }
 
+    /* Nav strip */
     .cs-next { border-top: 1px solid var(--hairline-dark); padding: clamp(32px, 4vw, 56px) var(--pad); display: flex; align-items: center; justify-content: space-between; }
     .cs-next-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-dark); margin-bottom: 8px; }
     .cs-next-name { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 36px); letter-spacing: -0.01em; text-transform: uppercase; color: var(--paper); transition: color 0.3s ease; }
     .cs-next a:hover .cs-next-name { color: var(--muted-dark); }
 
+    /* Footer */
     footer { margin: 0 var(--pad); padding-top: 32px; border-top: 1px solid var(--hairline-dark); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding-bottom: clamp(40px, 5vw, 64px); }
     .footer-status { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-dark); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
     .footer-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s ease-in-out infinite; }
@@ -142,13 +136,14 @@
       nav { transform: none !important; opacity: 1 !important; transition: none !important; }
       .main { opacity: 1 !important; transform: none !important; transition: none !important; }
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .cursor { display: none !important; } body, a { cursor: auto !important; }
+      .cursor { display: none !important; }
+      body, a { cursor: auto !important; }
     }
     @media (max-width: 900px) {
       body, a { cursor: auto; } .cursor { display: none; }
       body { overflow-y: auto; } .scroll-frame { position: static; overflow: visible; } .scroller { position: static; overflow: visible; height: auto; }
       .cs-header { flex-direction: column; align-items: flex-start; min-height: auto; }
-      .cs-hero-logo { width: clamp(120px, 30vw, 200px); align-self: flex-start; margin-top: 24px; }
+      .cs-hero-logo { width: clamp(100px, 28vw, 180px); align-self: flex-start; margin-top: 24px; }
       .cs-body { grid-template-columns: 1fr; }
       .cs-meta { grid-template-columns: repeat(2, 1fr); }
       .cs-meta-item:nth-child(2) { border-right: none; }
@@ -159,7 +154,8 @@
     }
     @media (max-width: 600px) {
       .cs-next { flex-direction: column; align-items: flex-start; gap: 20px; }
-      footer { flex-direction: column; align-items: flex-start; } .footer-right { align-items: flex-start; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-right { align-items: flex-start; }
       .nav-links { gap: 20px; }
     }
   </style>
@@ -167,11 +163,11 @@
 <body>
   <div class="cursor" id="cursor"></div>
   <nav id="mainNav">
-    <a href="/" class="nav-logo"><img src="assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark"></a>
+    <a href="/" class="nav-logo"><img src="/assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark"></a>
     <ul class="nav-links">
       <li><a href="/#work" class="active">Work</a></li>
-      <li><a href="info">Info</a></li>
-      <li><a href="contact">Contact</a></li>
+      <li><a href="/info">Info</a></li>
+      <li><a href="/contact">Contact</a></li>
     </ul>
   </nav>
   <div class="scroll-frame" id="scrollFrame">
@@ -181,51 +177,51 @@
         <div class="cs-header">
           <div class="cs-header-text">
             <a href="/#work" class="cs-back">← All Work</a>
-            <p class="cs-number">Case Study — 05</p>
-            <h1 class="cs-title">PSR<br>London</h1>
-            <p class="cs-descriptor">Product Design &nbsp;·&nbsp; Luxury Automotive &nbsp;·&nbsp; 2025–2026</p>
+            <p class="cs-number">Case Study — 01</p>
+            <h1 class="cs-title">Surf Coast<br>CC</h1>
+            <p class="cs-descriptor">Web Design &nbsp;·&nbsp; Sports / Cricket &nbsp;·&nbsp; 2024</p>
           </div>
-          <img src="assets/images/psr-logo.svg" alt="PSR London" class="cs-hero-logo" data-reveal>
+          <img src="/assets/images/sccc-logo.png" alt="Surf Coast Cricket Club" class="cs-hero-logo" data-reveal>
         </div>
 
         <div class="cs-meta" data-reveal>
-          <div class="cs-meta-item"><p class="cs-meta-key">Client</p><p class="cs-meta-val">PSR London</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Client</p><p class="cs-meta-val">Surf Coast CC</p></div>
           <div class="cs-meta-item"><p class="cs-meta-key">Role</p><p class="cs-meta-val">Design &amp; Development</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Stack</p><p class="cs-meta-val">Next.js / Payload / Clerk</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Year</p><p class="cs-meta-val">2025–2026</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Live</p><p class="cs-meta-val"><a href="https://stxacy.com/psr-london/" target="_blank" rel="noopener">stxacy.com/psr-london ↗</a></p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Stack</p><p class="cs-meta-val">HTML / CSS / JS</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Year</p><p class="cs-meta-val">2024</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Live</p><p class="cs-meta-val"><a href="https://stxacy.github.io/SCCC" target="_blank" rel="noopener">stxacy.github.io/SCCC ↗</a></p></div>
         </div>
 
         <div class="cs-body">
           <div data-reveal>
             <p class="cs-section-label">The Brief</p>
-            <h2 class="cs-section-heading">A marketplace built for prestige</h2>
-            <p class="cs-p">PSR London is a vetted luxury car marketplace — a platform where buyers and sellers of prestige vehicles transact with confidence. The brief called for a product that could compete visually and functionally at the top end of the automotive market, while handling the complexity of a two-sided marketplace under the hood.</p>
-            <p class="cs-p">Every design decision had to earn its place: nothing that would undermine the exclusivity of the listings, everything that would reduce friction for serious buyers.</p>
+            <h2 class="cs-section-heading">A digital home for the club</h2>
+            <p class="cs-p">Surf Coast Cricket Club needed a modern web presence that could bring together fixtures, team information, club news, and sponsor recognition in one place — accessible to members, families, and the wider community across Victoria's Surf Coast.</p>
+            <p class="cs-p">The brief was clear: build something that felt professional enough to attract sponsors and players, but warm enough to reflect the community-first culture at the club's core.</p>
           </div>
           <div data-reveal>
             <p class="cs-section-label">The Approach</p>
-            <h2 class="cs-section-heading">Black, gold, full production stack</h2>
-            <p class="cs-p">A monochromatic black-and-gold design language communicates exclusivity without performing it. Cream tones for editorial content, gold for calls to action — a restrained palette that keeps attention on the cars themselves.</p>
-            <p class="cs-p">The first project in this body of work to move beyond static HTML into a full production stack: Next.js 16 for the frontend, Payload CMS for content and listing management, Clerk for authentication, and Resend for transactional email. Built to scale.</p>
+            <h2 class="cs-section-heading">Bold identity, clean structure</h2>
+            <p class="cs-p">The club's red and gold palette becomes the primary design language — assertive in the hero, controlled throughout the content. Every section has a clear job: fixtures are scannable, team rosters are browsable, sponsors are prominent without being obtrusive.</p>
+            <p class="cs-p">Built and deployed on GitHub Pages with zero dependencies — fast everywhere, including regional mobile connections where a lot of club content gets consumed.</p>
           </div>
         </div>
 
         <div class="cs-detail" data-reveal>
-          <div class="cs-detail-item"><p class="cs-detail-label">Design system</p><p class="cs-detail-text">PSR black as the primary surface. Gold for actions and emphasis. Cream for editorial content. Every token earns its keep.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">Authentication</p><p class="cs-detail-text">Clerk handles user authentication — buyer accounts, seller verification, and session management — freeing the build to focus on the marketplace experience.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">CMS</p><p class="cs-detail-text">Payload CMS gives the PSR team full editorial control over listings, content pages, and seller profiles — no developer required for day-to-day management.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">Scale</p><p class="cs-detail-text">Next.js 16 with server-side rendering ensures listing pages are fast, crawlable, and consistent — critical for a marketplace where SEO drives organic buyer discovery.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Palette</p><p class="cs-detail-text">Club red and gold as primary drivers. Off-white for warmth. The colour system mirrors the playing kit — the site feels like the club.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Navigation</p><p class="cs-detail-text">Flat, tab-style navigation keeps the main sections — Fixtures, Teams, News, Partners — one tap from anywhere on the site.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Performance</p><p class="cs-detail-text">Zero frameworks, zero build step. Hosted on GitHub Pages. Loads fast on mobile data, where most club members browse between overs.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Sponsors</p><p class="cs-detail-text">Partner logos sit in a dedicated section rather than buried in a footer — giving sponsors the visibility they're paying for.</p></div>
         </div>
 
         <div class="cs-cta">
-          <p class="cs-cta-text">View the work</p>
-          <a href="https://stxacy.com/psr-london/" target="_blank" rel="noopener" class="cs-cta-btn"><span>See case overview ↗</span></a>
+          <p class="cs-cta-text">Live on GitHub Pages</p>
+          <a href="https://stxacy.github.io/SCCC" target="_blank" rel="noopener" class="cs-cta-btn"><span>Visit the site ↗</span></a>
         </div>
 
         <div class="cs-next">
-          <a href="crs"><p class="cs-next-label">← Prev</p><p class="cs-next-name">CRS Automotive</p></a>
-          <a href="/#work"><p class="cs-next-label">Back to</p><p class="cs-next-name">All Work →</p></a>
+          <a href="/#work"><p class="cs-next-label">← Back</p><p class="cs-next-name">All Work</p></a>
+          <a href="/greyspace"><p class="cs-next-label">Next Project</p><p class="cs-next-name">Greyspace UK →</p></a>
         </div>
 
         <footer>
@@ -234,7 +230,7 @@
             <a href="mailto:vik@stxacy.com" class="footer-email">vik@stxacy.com</a>
           </div>
           <div class="footer-right">
-            <nav class="footer-nav" aria-label="Footer"><a href="/#work">Work</a><a href="info">Info</a><a href="contact">Contact</a></nav>
+            <nav class="footer-nav" aria-label="Footer"><a href="/#work">Work</a><a href="/info">Info</a><a href="/contact">Contact</a></nav>
             <span class="footer-copy">© STXACY 2026</span>
           </div>
         </footer>
