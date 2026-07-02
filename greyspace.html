@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Greyspace UK — Case Study | STXACY</title>
+  <meta name="description" content="Case study: Greyspace Recordings — web presence designed and developed by Vik Rathore (STXACY).">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/stxacy-favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/stxacy-favicon-512.png">
+  <link rel="apple-touch-icon" href="assets/images/stxacy-favicon-512.png">
+  <link rel="canonical" href="https://stxacy.com/greyspace">
+  <meta property="og:title" content="Greyspace UK — Case Study | STXACY">
+  <meta property="og:description" content="Web presence for Greyspace Recordings, designed and developed by Vik Rathore.">
+  <meta property="og:image" content="https://stxacy.com/assets/images/greyspace-uk.png">
+  <meta property="og:url" content="https://stxacy.com/greyspace">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@900&family=Space+Grotesk:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Tokens ────────────────────────────────────────────────── */
+    :root {
+      --ink:           #0B0B0B;
+      --surface:       #141412;
+      --paper:         #F2F2EF;
+      --muted-dark:    #8A8A82;
+      --hairline-dark: #2A2A26;
+
+      --font-display:   'Anton', sans-serif;
+      --font-editorial: 'Archivo', sans-serif;
+      --font-body:      'Space Grotesk', sans-serif;
+      --font-mono:      'Space Mono', monospace;
+
+      --ease-out: cubic-bezier(.16,1,.3,1);
+      --pad: clamp(20px, 4vw, 56px);
+      --gap: clamp(12px, 2.5vw, 40px);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-body);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    a { color: inherit; text-decoration: none; cursor: none; }
+
+    /* ── Cursor ────────────────────────────────────────────────── */
+    .cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background: var(--paper);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      will-change: transform;
+      mix-blend-mode: difference;
+    }
+
+    /* ── Nav ───────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: max(16px, env(safe-area-inset-left));
+      right: max(16px, env(safe-area-inset-right));
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 52px;
+      background: rgba(11,11,11,0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--hairline-dark);
+      border-radius: 14px;
+      opacity: 0;
+      transform: translateY(calc(-100% - 20px));
+    }
+
+    body.loaded nav {
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.75s var(--ease-out) 0.1s, opacity 0.5s ease 0.1s;
+    }
+
+    .nav-logo { flex-shrink: 0; display: flex; align-items: center; }
+
+    .nav-wordmark {
+      height: 26px;
+      width: auto;
+      display: block;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-logo:hover .nav-wordmark { opacity: 1; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--paper); }
+
+    /* ── Scroll frame ──────────────────────────────────────────── */
+    .scroll-frame { position: fixed; inset: 0; overflow: hidden; }
+
+    .scroller {
+      position: absolute;
+      inset: 0;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .scroller::-webkit-scrollbar { display: none; }
+
+    /* ── Main ──────────────────────────────────────────────────── */
+    .main {
+      padding-top: calc(52px + 40px);
+      padding-bottom: clamp(80px, 10vw, 160px);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s var(--ease-out) 0.15s, transform 0.8s var(--ease-out) 0.15s;
+    }
+
+    body.loaded .main { opacity: 1; transform: translateY(0); }
+
+    /* ── Case study header ─────────────────────────────────────── */
+    .cs-header {
+      padding: var(--pad);
+      padding-top: calc(var(--pad) + 16px);
+      padding-bottom: clamp(40px, 5vw, 72px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: clamp(32px, 5vw, 80px);
+      min-height: 52vh;
+      background: #0033FF;
+      margin-bottom: clamp(48px, 6vw, 88px);
+    }
+
+    .cs-header-text { flex: 1; min-width: 0; }
+
+    .cs-hero-logo {
+      flex-shrink: 0;
+      width: clamp(180px, 26vw, 380px);
+      height: auto;
+      display: block;
+      opacity: 0.92;
+      align-self: center;
+    }
+
+    .cs-back {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: clamp(32px, 4vw, 56px);
+      transition: color 0.3s ease;
+    }
+
+    .cs-back:hover { color: #fff; }
+
+    .cs-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-number::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .cs-title {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 10vw, 160px);
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: clamp(20px, 2.5vw, 32px);
+    }
+
+    .cs-descriptor {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── Meta strip ────────────────────────────────────────────── */
+    .cs-meta {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--hairline-dark);
+      border-bottom: 1px solid var(--hairline-dark);
+      margin: 0 var(--pad);
+    }
+
+    .cs-meta-item {
+      padding: clamp(20px, 2.5vw, 32px) 0;
+      border-right: 1px solid var(--hairline-dark);
+      padding-right: clamp(16px, 2vw, 28px);
+    }
+
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-item:not(:first-child) { padding-left: clamp(16px, 2vw, 28px); }
+
+    .cs-meta-key {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      margin-bottom: 8px;
+    }
+
+    .cs-meta-val {
+      font-family: var(--font-editorial);
+      font-weight: 900;
+      font-size: clamp(13px, 1.2vw, 17px);
+      letter-spacing: -0.02em;
+      color: var(--paper);
+      line-height: 1.2;
+    }
+
+    .cs-meta-val a {
+      color: var(--paper);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cs-meta-val a:hover { color: var(--muted-dark); }
+
+    /* ── Body content ──────────────────────────────────────────── */
+    .cs-body {
+      padding: clamp(48px, 6vw, 88px) var(--pad);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .cs-section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--hairline-dark);
+    }
+
+    .cs-section-heading {
+      font-family: var(--font-editorial);
+      font-weight: 900;
+      font-size: clamp(28px, 3vw, 44px);
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: var(--paper);
+      margin-bottom: clamp(20px, 2.5vw, 32px);
+    }
+
+    .cs-p {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.2vw, 17px);
+      line-height: 1.72;
+      color: var(--muted-dark);
+      margin-bottom: 18px;
+    }
+
+    .cs-p:last-child { margin-bottom: 0; }
+
+    /* ── Detail strip (surface bg) ─────────────────────────────── */
+    .cs-detail {
+      margin: clamp(48px, 6vw, 80px) var(--pad);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--hairline-dark);
+      border: 1px solid var(--hairline-dark);
+    }
+
+    .cs-detail-item {
+      background: var(--surface);
+      padding: clamp(24px, 3vw, 40px);
+    }
+
+    .cs-detail-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      margin-bottom: 12px;
+    }
+
+    .cs-detail-text {
+      font-family: var(--font-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.65;
+      color: var(--paper);
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────── */
+    .cs-cta {
+      padding: clamp(40px, 5vw, 72px) var(--pad);
+      border-top: 1px solid var(--hairline-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .cs-cta-text {
+      font-family: var(--font-editorial);
+      font-weight: 900;
+      font-size: clamp(22px, 2.8vw, 40px);
+      letter-spacing: -0.025em;
+      color: var(--paper);
+    }
+
+    .cs-cta-btn {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--paper);
+      border: none;
+      padding: 18px 36px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .cs-cta-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(.76,0,.24,1);
+    }
+
+    .cs-cta-btn:hover { color: var(--paper); }
+    .cs-cta-btn:hover::after { transform: translateX(0); }
+
+    .cs-cta-btn span { position: relative; z-index: 1; }
+
+    /* ── Next project ──────────────────────────────────────────── */
+    .cs-next {
+      border-top: 1px solid var(--hairline-dark);
+      padding: clamp(32px, 4vw, 56px) var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cs-next-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      margin-bottom: 8px;
+    }
+
+    .cs-next-name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 36px);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--paper);
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cs-next a:hover .cs-next-name { color: var(--muted-dark); }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    footer {
+      margin: 0 var(--pad);
+      padding-top: 32px;
+      border-top: 1px solid var(--hairline-dark);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-bottom: clamp(40px, 5vw, 64px);
+    }
+
+    .footer-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .footer-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .footer-email {
+      font-family: var(--font-editorial);
+      font-weight: 900;
+      font-size: clamp(22px, 2.8vw, 42px);
+      letter-spacing: -0.025em;
+      color: var(--paper);
+      transition: color 0.3s ease;
+    }
+
+    .footer-email:hover { color: var(--muted-dark); }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .footer-nav { display: flex; gap: 24px; }
+
+    .footer-nav a {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover { color: var(--paper); }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--hairline-dark);
+    }
+
+    /* ── Reveal ────────────────────────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+    }
+
+    /* ── Reduced motion ────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      nav           { transform: none !important; opacity: 1 !important; transition: none !important; }
+      .main         { opacity: 1 !important; transform: none !important; transition: none !important; }
+      [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .cursor       { display: none !important; }
+      body, a       { cursor: auto !important; }
+    }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      body, a { cursor: auto; }
+      .cursor { display: none; }
+      body { overflow-y: auto; }
+      .scroll-frame { position: static; overflow: visible; }
+      .scroller { position: static; overflow: visible; height: auto; }
+
+      .cs-header { flex-direction: column; align-items: flex-start; min-height: auto; }
+      .cs-hero-logo { width: clamp(120px, 30vw, 200px); align-self: flex-start; margin-top: 24px; }
+      .cs-body { grid-template-columns: 1fr; }
+      .cs-meta { grid-template-columns: repeat(2, 1fr); }
+      .cs-meta-item:nth-child(3) { border-right: none; }
+      .cs-meta-item:nth-child(4) { border-right: 1px solid var(--hairline-dark); }
+      .cs-meta-item:last-child { grid-column: 1 / -1; border-right: none; }
+      .cs-detail { grid-template-columns: 1fr; }
+      [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 600px) {
+      .cs-meta { grid-template-columns: 1fr 1fr; }
+      .cs-next { flex-direction: column; align-items: flex-start; gap: 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-right { align-items: flex-start; }
+      .nav-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Nav -->
+  <nav id="mainNav">
+    <a href="/" class="nav-logo">
+      <img src="assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#work" class="active">Work</a></li>
+      <li><a href="info">Info</a></li>
+      <li><a href="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Scroll frame -->
+  <div class="scroll-frame" id="scrollFrame">
+    <div class="scroller" id="scroller">
+      <main class="main">
+
+        <!-- Header -->
+        <div class="cs-header">
+          <div class="cs-header-text">
+            <a href="/#work" class="cs-back">← All Work</a>
+            <p class="cs-number">Case Study — 02</p>
+            <h1 class="cs-title">Greyspace<br>UK</h1>
+            <p class="cs-descriptor">Web Design &nbsp;·&nbsp; Electronic Music &nbsp;·&nbsp; 2025</p>
+          </div>
+          <img src="assets/images/gsr-icon-light.png" alt="Greyspace Recordings" class="cs-hero-logo" data-reveal>
+        </div>
+
+        <!-- Meta strip -->
+        <div class="cs-meta" data-reveal>
+          <div class="cs-meta-item">
+            <p class="cs-meta-key">Client</p>
+            <p class="cs-meta-val">Greyspace Recordings</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-key">Role</p>
+            <p class="cs-meta-val">Design &amp; Development</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-key">Stack</p>
+            <p class="cs-meta-val">HTML / CSS / JS</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-key">Year</p>
+            <p class="cs-meta-val">2025</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-key">Live</p>
+            <p class="cs-meta-val">
+              <a href="https://greyspacerecordings.co.uk/" target="_blank" rel="noopener">
+                greyspacerecordings.co.uk ↗
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Body copy -->
+        <div class="cs-body">
+          <div data-reveal>
+            <p class="cs-section-label">The Brief</p>
+            <h2 class="cs-section-heading">A space as heavy as the music</h2>
+            <p class="cs-p">Greyspace Recordings needed a web presence that could hold the weight of their output — a UK-based electronic label sitting across underground club music, ambient, and experimental sounds. The ask was simple: build something minimal but loaded with atmosphere.</p>
+            <p class="cs-p">The site needed to feel authoritative without being cold — a digital home that reflected the label's aesthetic without competing with the music itself.</p>
+          </div>
+
+          <div data-reveal>
+            <p class="cs-section-label">The Approach</p>
+            <h2 class="cs-section-heading">Typography-first, atmosphere-led</h2>
+            <p class="cs-p">The design leans into negative space and a tight typographic system. A dark-first palette keeps the focus on the release catalogue, using deliberate contrast and whitespace as tools rather than decoration.</p>
+            <p class="cs-p">Built entirely by hand in HTML, CSS, and JavaScript — no frameworks — giving complete control over performance, motion, and the fine details that make the difference between a site that feels finished and one that just works.</p>
+          </div>
+        </div>
+
+        <!-- Design decisions strip -->
+        <div class="cs-detail" data-reveal>
+          <div class="cs-detail-item">
+            <p class="cs-detail-label">Palette</p>
+            <p class="cs-detail-text">Monochromatic dark base — black, near-black, and off-white only. Colour would distract from the release artwork and the label's identity.</p>
+          </div>
+          <div class="cs-detail-item">
+            <p class="cs-detail-label">Typography</p>
+            <p class="cs-detail-text">Display type treated as texture. Mono for metadata. Body set looser for readability without losing the editorial tone.</p>
+          </div>
+          <div class="cs-detail-item">
+            <p class="cs-detail-label">Interaction</p>
+            <p class="cs-detail-text">Subtle hover states and custom cursor behaviour — enough to reward attention without performing for its own sake.</p>
+          </div>
+          <div class="cs-detail-item">
+            <p class="cs-detail-label">Performance</p>
+            <p class="cs-detail-text">Zero dependencies. No frameworks, no build step. Hand-coded for speed and complete control over every interaction.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cs-cta">
+          <p class="cs-cta-text">Live at greyspacerecordings.co.uk</p>
+          <a href="https://greyspacerecordings.co.uk/" target="_blank" rel="noopener" class="cs-cta-btn">
+            <span>Visit the site ↗</span>
+          </a>
+        </div>
+
+        <!-- Next project -->
+        <div class="cs-next">
+          <a href="/#work">
+            <p class="cs-next-label">← Back</p>
+            <p class="cs-next-name">All Work</p>
+          </a>
+          <a href="https://kingscotehaulage.co.uk/" target="_blank" rel="noopener">
+            <p class="cs-next-label">Next Project</p>
+            <p class="cs-next-name">Kingscote Haulage ↗</p>
+          </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+          <div class="footer-left">
+            <p class="footer-status">Available for new projects</p>
+            <a href="mailto:vik@stxacy.com" class="footer-email">vik@stxacy.com</a>
+          </div>
+          <div class="footer-right">
+            <nav class="footer-nav" aria-label="Footer">
+              <a href="/#work">Work</a>
+              <a href="info">Info</a>
+              <a href="contact">Contact</a>
+            </nav>
+            <span class="footer-copy">© STXACY 2026</span>
+          </div>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // ── Cursor ──────────────────────────────────────────────────
+    const cursorEl = document.getElementById('cursor');
+    let cx = 0, cy = 0, tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+    let cursorScale = 1;
+    document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+
+    // ── Load ────────────────────────────────────────────────────
+    document.body.classList.add('loaded');
+
+    // ── Momentum scroll (desktop only) ──────────────────────────
+    const scrollFrame = document.getElementById('scrollFrame');
+    const scroller    = document.getElementById('scroller');
+    let scrollTarget = 0, scrollCurrent = 0;
+    const isMobile = () => window.innerWidth <= 900;
+
+    scrollFrame.addEventListener('wheel', e => {
+      if (isMobile()) return;
+      e.preventDefault();
+      const max = scroller.scrollHeight - scroller.clientHeight;
+      scrollTarget = Math.max(0, Math.min(max, scrollTarget + e.deltaY));
+    }, { passive: false });
+
+    // ── Reveals ─────────────────────────────────────────────────
+    let reveals = [...document.querySelectorAll('[data-reveal]')];
+
+    function checkReveals() {
+      if (!reveals.length) return;
+      const threshold = scroller.getBoundingClientRect().bottom * 0.9;
+      for (let i = reveals.length - 1; i >= 0; i--) {
+        if (reveals[i].getBoundingClientRect().top < threshold) {
+          reveals[i].style.opacity   = '1';
+          reveals[i].style.transform = 'none';
+          reveals.splice(i, 1);
+        }
+      }
+    }
+
+    // ── Cursor scale on links ────────────────────────────────────
+    document.querySelectorAll('a').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursorScale = 3.2; });
+      el.addEventListener('mouseleave', () => { cursorScale = 1; });
+    });
+
+    // ── rAF loop ─────────────────────────────────────────────────
+    function loop() {
+      if (!isMobile()) {
+        scrollCurrent += (scrollTarget - scrollCurrent) * 0.10;
+        scroller.scrollTop = scrollCurrent;
+      }
+      cx += (tx - cx) * 0.20;
+      cy += (ty - cy) * 0.20;
+      cursorEl.style.transform =
+        `translate(${cx.toFixed(2)}px,${cy.toFixed(2)}px) translate(-50%,-50%) scale(${cursorScale})`;
+      checkReveals();
+      requestAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>

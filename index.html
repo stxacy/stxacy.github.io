@@ -415,12 +415,13 @@
     /* Row 2 */
     .work-item:nth-child(3) { grid-column: 1 / 5;  aspect-ratio: 3/4; }
     .work-item:nth-child(4) { grid-column: 5 / 13; aspect-ratio: 16/10; margin-top: 60px; }
-    /* Row 3 — full bleed */
-    .work-item:nth-child(5) { grid-column: 1 / 13; aspect-ratio: 21/8; }
+    /* Row 3 */
+    .work-item:nth-child(5) { grid-column: 1 / 7;  aspect-ratio: 4/3; }
+    .work-item:nth-child(6) { grid-column: 7 / 13; aspect-ratio: 4/3;   margin-top: 48px; }
     /* Row 4 */
-    .work-item:nth-child(6) { grid-column: 1 / 5;  aspect-ratio: 5/4; }
-    .work-item:nth-child(7) { grid-column: 5 / 9;  aspect-ratio: 5/4;   margin-top: 60px; }
-    .work-item:nth-child(8) { grid-column: 9 / 13; aspect-ratio: 4/3; }
+    .work-item:nth-child(7) { grid-column: 1 / 5;  aspect-ratio: 5/4; }
+    .work-item:nth-child(8) { grid-column: 5 / 9;  aspect-ratio: 5/4;   margin-top: 60px; }
+    .work-item:nth-child(9) { grid-column: 9 / 13; aspect-ratio: 4/3; }
 
     /* ── Reveal ────────────────────────────────────────────────── */
     [data-reveal] {
@@ -533,10 +534,11 @@
       .work-item:nth-child(2) { grid-column: 1 / 7; margin-top: 0; aspect-ratio: 16/10; }
       .work-item:nth-child(3) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 4/3; }
       .work-item:nth-child(4) { grid-column: 4 / 7; margin-top: 0; aspect-ratio: 4/3; }
-      .work-item:nth-child(5) { grid-column: 1 / 7; margin-top: 0; aspect-ratio: 16/9; }
-      .work-item:nth-child(6) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 1/1; }
-      .work-item:nth-child(7) { grid-column: 4 / 7; margin-top: 0; aspect-ratio: 1/1; }
-      .work-item:nth-child(8) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 1/1; }
+      .work-item:nth-child(5) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 4/3; }
+      .work-item:nth-child(6) { grid-column: 4 / 7; margin-top: 0; aspect-ratio: 4/3; }
+      .work-item:nth-child(7) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 1/1; }
+      .work-item:nth-child(8) { grid-column: 4 / 7; margin-top: 0; aspect-ratio: 1/1; }
+      .work-item:nth-child(9) { grid-column: 1 / 4; margin-top: 0; aspect-ratio: 1/1; }
 
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .work-overlay { opacity: 1; background: linear-gradient(to top, rgba(11,11,11,0.65) 0%, transparent 55%); }
@@ -546,7 +548,6 @@
     @media (max-width: 600px) {
       .work-grid { grid-template-columns: repeat(2, 1fr); }
       .work-item:nth-child(n) { grid-column: span 1; margin-top: 0; aspect-ratio: 4/3; }
-      .work-item:nth-child(5) { grid-column: 1 / 3; aspect-ratio: 16/9; }
       .nav-links { gap: 20px; }
       footer { flex-direction: column; align-items: flex-start; }
       .footer-right { align-items: flex-start; }
@@ -611,13 +612,13 @@
         <section class="work-section" id="work">
           <div class="work-header">
             <span class="work-section-label">[ 2024–2026 ]</span>
-            <span class="work-count">08 Projects</span>
+            <span class="work-count">09 Projects</span>
           </div>
 
           <div class="work-grid">
 
             <!-- 01 Surf Coast CC -->
-            <a href="https://stxacy.github.io/SCCC" target="_blank" rel="noopener"
+            <a href="surfcoast"
                class="work-item" data-pat="stripes" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/scccsplashscreen1.png" alt="Surf Coast Cricket Club" class="work-img">
@@ -632,7 +633,7 @@
             </a>
 
             <!-- 02 Greyspace UK -->
-            <a href="https://greyspacerecordings.co.uk/" target="_blank" rel="noopener"
+            <a href="greyspace"
                class="work-item" data-pat="dots" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/greyspace-uk.png" alt="Greyspace UK" class="work-img">
@@ -647,7 +648,7 @@
             </a>
 
             <!-- 03 Kingscote Haulage -->
-            <a href="https://kingscotehaulage.co.uk/" target="_blank" rel="noopener"
+            <a href="kingscote"
                class="work-item" data-pat="grid" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/kingscote-haulage.png" alt="Kingscote Haulage" class="work-img">
@@ -662,7 +663,7 @@
             </a>
 
             <!-- 04 CRS Automotive -->
-            <a href="https://stxacy.github.io/crs-automotive/" target="_blank" rel="noopener"
+            <a href="crs"
                class="work-item" data-pat="lines" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/crs-automotive.png" alt="CRS Automotive" class="work-img">
@@ -676,60 +677,75 @@
               </div>
             </a>
 
-            <!-- 05 Crest Racing — banner -->
-            <a href="https://stxacy.github.io/crest-racing/" target="_blank" rel="noopener"
-               class="work-item" data-pat="wide" data-reveal>
+            <!-- 05 PSR London -->
+            <a href="psr"
+               class="work-item" data-pat="lines" data-reveal>
               <div class="work-thumb">
-                <img src="assets/images/crest-racing.png" alt="Crest Racing" class="work-img">
+                <img src="assets/images/psrlondonsplash.png" alt="PSR London" class="work-img">
                 <div class="work-fill" id="fill-5"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
                     <p class="work-type">Web Design &mdash; 05</p>
+                    <p class="work-name">PSR London <span class="work-arrow">↗</span></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- 06 Crest Racing -->
+            <a href="https://stxacy.github.io/crest-racing/" target="_blank" rel="noopener"
+               class="work-item" data-pat="wide" data-reveal>
+              <div class="work-thumb">
+                <img src="assets/images/crest-racing.png" alt="Crest Racing" class="work-img">
+                <div class="work-fill" id="fill-6"></div>
+                <div class="work-overlay">
+                  <div class="work-meta">
+                    <p class="work-type">Web Design &mdash; 06</p>
                     <p class="work-name">Crest Racing <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 06 CRTZ -->
+            <!-- 07 CRTZ -->
             <a href="https://stxacy.github.io/crtz/" target="_blank" rel="noopener"
                class="work-item" data-pat="checker" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/crtz.png" alt="CRTZ" class="work-img">
-                <div class="work-fill" id="fill-6"></div>
+                <div class="work-fill" id="fill-7"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 06</p>
+                    <p class="work-type">Web Design &mdash; 07</p>
                     <p class="work-name">CRTZ <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 07 Subspace Birmingham -->
+            <!-- 08 Subspace Birmingham -->
             <a href="https://stxacy.github.io/subspace-birmingham/" target="_blank" rel="noopener"
                class="work-item" data-pat="vlines" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/sb.png" alt="Subspace Birmingham" class="work-img">
-                <div class="work-fill" id="fill-7"></div>
+                <div class="work-fill" id="fill-8"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 07</p>
+                    <p class="work-type">Web Design &mdash; 08</p>
                     <p class="work-name">Subspace BCM <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 08 Volm Studio -->
+            <!-- 09 Volm Studio -->
             <a href="https://stxacy.github.io/volm-studio/" target="_blank" rel="noopener"
                class="work-item" data-pat="crosshatch" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/volm-studio.png" alt="Volm Studio" class="work-img" style="object-position: top center;">
-                <div class="work-fill" id="fill-8"></div>
+                <div class="work-fill" id="fill-9"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 08</p>
+                    <p class="work-type">Web Design &mdash; 09</p>
                     <p class="work-name">Volm Studio <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
