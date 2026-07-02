@@ -63,6 +63,15 @@
       mix-blend-mode: difference;
     }
 
+    body:not(.loaded) { overflow: hidden; }
+    .splash { position: fixed; inset: 0; z-index: 10000; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; cursor: pointer; user-select: none; }
+    .splash-logo-wrap { perspective: 1200px; }
+    .splash-logo { width: min(260px, 52vw); height: auto; display: block; animation: wordmarkSpin 9s linear infinite; }
+    @keyframes wordmarkSpin { from { transform: rotateY(0deg) rotateX(5deg); } to { transform: rotateY(360deg) rotateX(5deg); } }
+    .splash-hint { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,242,239,0.3); }
+    @keyframes splashOut { to { opacity: 0; pointer-events: none; } }
+    .splash.out { animation: splashOut 0.5s ease forwards; }
+
     /* ── Nav ───────────────────────────────────────────────────── */
     nav {
       position: fixed;
@@ -524,6 +533,7 @@
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .cursor       { display: none !important; }
       body, a       { cursor: auto !important; }
+      .splash       { display: none !important; }
     }
 
     /* ── Responsive ────────────────────────────────────────────── */
