@@ -107,7 +107,7 @@
     .splash.out { animation: splashOut 0.5s ease forwards; }
 
     /* ── Nav ───────────────────────────────────────────────────── */
-    nav {
+    #mainNav {
       position: fixed;
       top: max(16px, env(safe-area-inset-top));
       left: max(16px, env(safe-area-inset-left));
@@ -127,7 +127,7 @@
       transform: translateY(calc(-100% - 20px));
     }
 
-    body.loaded nav {
+    body.loaded #mainNav {
       opacity: 1;
       transform: translateY(0);
       transition: transform 0.75s var(--ease-out) 0.2s, opacity 0.5s ease 0.2s;
@@ -526,7 +526,7 @@
     /* ── Reduced motion ────────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       .splash       { display: none !important; }
-      nav           { transform: none !important; opacity: 1 !important; transition: none !important; }
+      #mainNav           { transform: none !important; opacity: 1 !important; transition: none !important; }
       .main         { opacity: 1 !important; transform: none !important; transition: none !important; }
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .cursor       { display: none !important; }
