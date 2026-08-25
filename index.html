@@ -26,7 +26,7 @@
     "jobTitle": "UX/UI Designer & Web Developer",
     "description": "London-based UX/UI designer and web developer specialising in digital experience design, brand identity, and AI-powered creative work.",
     "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
-    "sameAs": ["https://www.instagram.com/stxacy/"]
+    "sameAs": ["https://www.instagram.com/stxacy/", "https://dribbble.com/stxacy"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -419,9 +419,11 @@
     .work-item:nth-child(5) { grid-column: 1 / 7;  aspect-ratio: 4/3; }
     .work-item:nth-child(6) { grid-column: 7 / 13; aspect-ratio: 4/3;   margin-top: 48px; }
     /* Row 4 */
-    .work-item:nth-child(7) { grid-column: 1 / 5;  aspect-ratio: 5/4; }
-    .work-item:nth-child(8) { grid-column: 5 / 9;  aspect-ratio: 5/4;   margin-top: 60px; }
-    .work-item:nth-child(9) { grid-column: 9 / 13; aspect-ratio: 4/3; }
+    .work-item:nth-child(7) { grid-column: 1 / 9;  aspect-ratio: 16/10; }
+    .work-item:nth-child(8) { grid-column: 9 / 13; aspect-ratio: 4/3;   margin-top: 80px; }
+    /* Row 5 */
+    .work-item:nth-child(9)  { grid-column: 1 / 5;  aspect-ratio: 3/4; }
+    .work-item:nth-child(10) { grid-column: 5 / 13; aspect-ratio: 16/10; margin-top: 60px; }
 
     /* ── Reveal ────────────────────────────────────────────────── */
     [data-reveal] {
@@ -538,7 +540,8 @@
       .work-item:nth-child(6) { grid-column: 4 / 7; margin-top: 36px; aspect-ratio: 4/3; }
       .work-item:nth-child(7) { grid-column: 1 / 4; margin-top: 0;   aspect-ratio: 1/1; }
       .work-item:nth-child(8) { grid-column: 4 / 7; margin-top: 36px; aspect-ratio: 1/1; }
-      .work-item:nth-child(9) { grid-column: 1 / 7; margin-top: 0;   aspect-ratio: 16/10; }
+      .work-item:nth-child(9)  { grid-column: 1 / 4; margin-top: 0;   aspect-ratio: 4/3; }
+      .work-item:nth-child(10) { grid-column: 4 / 7; margin-top: 36px; aspect-ratio: 4/3; }
 
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
       .work-overlay { opacity: 1; background: linear-gradient(to top, rgba(11,11,11,0.65) 0%, transparent 55%); }
@@ -558,6 +561,7 @@
       .work-item:nth-child(7) { grid-column: 1 / 5; aspect-ratio: 16/9; }
       .work-item:nth-child(8) { grid-column: 1 / 3; aspect-ratio: 4/3; }
       .work-item:nth-child(9) { grid-column: 3 / 5; aspect-ratio: 4/3; }
+      .work-item:nth-child(10) { grid-column: 1 / 5; aspect-ratio: 4/3; }
       .work-name { font-size: clamp(13px, 3.8vw, 18px); }
       .nav-links { gap: 20px; }
       footer { flex-direction: column; align-items: flex-start; }
@@ -623,7 +627,7 @@
         <section class="work-section" id="work">
           <div class="work-header">
             <span class="work-section-label">[ 2024–2026 ]</span>
-            <span class="work-count">09 Projects</span>
+            <span class="work-count">10 Projects</span>
           </div>
 
           <div class="work-grid">
@@ -688,75 +692,90 @@
               </div>
             </a>
 
-            <!-- 05 PSR London -->
-            <a href="psr"
-               class="work-item" data-pat="lines" data-reveal>
+            <!-- 05 Morrisroe Group -->
+            <a href="morrisroe"
+               class="work-item" data-pat="grid" data-reveal>
               <div class="work-thumb">
-                <img src="assets/images/psrlondonsplash.png" alt="PSR London" class="work-img">
+                <img src="assets/images/morrisroe-cover.svg" alt="Morrisroe Group" class="work-img">
                 <div class="work-fill" id="fill-5"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
                     <p class="work-type">Web Design &mdash; 05</p>
+                    <p class="work-name">Morrisroe Group <span class="work-arrow">↗</span></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- 06 PSR London -->
+            <a href="psr"
+               class="work-item" data-pat="lines" data-reveal>
+              <div class="work-thumb">
+                <img src="assets/images/psrlondonsplash.png" alt="PSR London" class="work-img">
+                <div class="work-fill" id="fill-6"></div>
+                <div class="work-overlay">
+                  <div class="work-meta">
+                    <p class="work-type">Web Design &mdash; 06</p>
                     <p class="work-name">PSR London <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 06 Crest Racing -->
+            <!-- 07 Crest Racing -->
             <a href="https://stxacy.github.io/crest-racing/" target="_blank" rel="noopener"
                class="work-item" data-pat="wide" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/crest-racing.png" alt="Crest Racing" class="work-img">
-                <div class="work-fill" id="fill-6"></div>
+                <div class="work-fill" id="fill-7"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 06</p>
+                    <p class="work-type">Web Design &mdash; 07</p>
                     <p class="work-name">Crest Racing <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 07 CRTZ -->
+            <!-- 08 CRTZ -->
             <a href="https://stxacy.github.io/crtz/" target="_blank" rel="noopener"
                class="work-item" data-pat="checker" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/crtz.png" alt="CRTZ" class="work-img">
-                <div class="work-fill" id="fill-7"></div>
+                <div class="work-fill" id="fill-8"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 07</p>
+                    <p class="work-type">Web Design &mdash; 08</p>
                     <p class="work-name">CRTZ <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 08 Subspace Birmingham -->
+            <!-- 09 Subspace Birmingham -->
             <a href="https://stxacy.github.io/subspace-birmingham/" target="_blank" rel="noopener"
                class="work-item" data-pat="vlines" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/sb.png" alt="Subspace Birmingham" class="work-img">
-                <div class="work-fill" id="fill-8"></div>
+                <div class="work-fill" id="fill-9"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 08</p>
+                    <p class="work-type">Web Design &mdash; 09</p>
                     <p class="work-name">Subspace BCM <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
               </div>
             </a>
 
-            <!-- 09 Volm Studio -->
+            <!-- 10 Volm Studio -->
             <a href="https://stxacy.github.io/volm-studio/" target="_blank" rel="noopener"
                class="work-item" data-pat="crosshatch" data-reveal>
               <div class="work-thumb">
                 <img src="assets/images/volm-studio.png" alt="Volm Studio" class="work-img" style="object-position: top center;">
-                <div class="work-fill" id="fill-9"></div>
+                <div class="work-fill" id="fill-10"></div>
                 <div class="work-overlay">
                   <div class="work-meta">
-                    <p class="work-type">Web Design &mdash; 09</p>
+                    <p class="work-type">Web Design &mdash; 10</p>
                     <p class="work-name">Volm Studio <span class="work-arrow">↗</span></p>
                   </div>
                 </div>
@@ -778,7 +797,7 @@
               <a href="info">Info</a>
               <a href="contact">Contact</a>
               <a href="https://www.instagram.com/stxacy/" target="_blank" rel="noopener">Instagram</a>
-              <a href="https://dribbble.com/" target="_blank" rel="noopener">Dribbble</a>
+              <a href="https://dribbble.com/stxacy" target="_blank" rel="noopener">Dribbble</a>
             </nav>
             <span class="footer-copy">© STXACY 2026</span>
           </div>

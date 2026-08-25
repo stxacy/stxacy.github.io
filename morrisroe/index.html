@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>CRS Automotive — Case Study | STXACY</title>
-  <meta name="description" content="Case study: CRS Automotive — web presence designed and developed by Vik Rathore (STXACY).">
-  <link rel="canonical" href="https://stxacy.com/crs">
-  <meta property="og:title" content="CRS Automotive — Case Study | STXACY">
-  <meta property="og:description" content="Web presence for CRS Automotive, designed and developed by Vik Rathore.">
-  <meta property="og:image" content="https://stxacy.com/assets/images/crs-automotive.png">
-  <meta property="og:url" content="https://stxacy.com/crs">
+  <title>Morrisroe Group — Case Study | STXACY</title>
+  <meta name="description" content="Case study: Morrisroe Group employee intranet — designed and developed by Vik Rathore (STXACY).">
+  <link rel="canonical" href="https://stxacy.com/morrisroe">
+  <meta property="og:title" content="Morrisroe Group — Case Study | STXACY">
+  <meta property="og:description" content="A private, multilingual employee intranet PWA for Morrisroe Group, designed and developed by Vik Rathore.">
+  <meta property="og:image" content="https://stxacy.com/assets/images/morrisroe-cover.svg">
+  <meta property="og:url" content="https://stxacy.com/morrisroe">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://stxacy.com/assets/images/crs-automotive.png">
+  <meta name="twitter:image" content="https://stxacy.com/assets/images/morrisroe-cover.svg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "name": "CRS Automotive — Website",
-    "description": "Web presence for CRS Automotive, designed and developed by Vik Rathore (STXACY).",
-    "url": "https://stxacy.github.io/crs-automotive/",
+    "name": "Morrisroe Group — Employee Intranet",
+    "description": "Private, multilingual employee intranet PWA for Morrisroe Group, designed and developed by Vik Rathore (STXACY).",
     "creator": { "@type": "Person", "name": "Vik Rathore", "url": "https://stxacy.com" }
   }
   </script>
@@ -36,7 +35,7 @@
       --paper:         #F2F2EF;
       --muted-dark:    #8A8A82;
       --hairline-dark: #2A2A26;
-      --accent:        #0B0B0B;
+      --accent:        #101c3e;
       --font-display:   'Anton', sans-serif;
       --font-editorial: 'Archivo', sans-serif;
       --font-body:      'Space Grotesk', sans-serif;
@@ -78,14 +77,14 @@
     /* Hero */
     .cs-header { padding: var(--pad); padding-top: calc(var(--pad) + 16px); padding-bottom: clamp(40px, 5vw, 72px); display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(32px, 5vw, 80px); min-height: 52vh; background: var(--accent); margin-bottom: clamp(48px, 6vw, 88px); }
     .cs-header-text { flex: 1; min-width: 0; }
-    .cs-hero-logo { flex-shrink: 0; width: clamp(140px, 22vw, 320px); height: auto; display: block; align-self: center; }
+    .cs-hero-logo { flex-shrink: 0; width: clamp(160px, 24vw, 340px); height: auto; display: block; align-self: center; color: #fff; }
 
-    .cs-back { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); display: inline-flex; align-items: center; gap: 8px; margin-bottom: clamp(32px, 4vw, 56px); transition: color 0.3s ease; }
+    .cs-back { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: inline-flex; align-items: center; gap: 8px; margin-bottom: clamp(32px, 4vw, 56px); transition: color 0.3s ease; }
     .cs-back:hover { color: #fff; }
-    .cs-number { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-    .cs-number::before { content: ''; display: block; width: 20px; height: 1px; background: rgba(255,255,255,0.3); }
+    .cs-number { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .cs-number::before { content: ''; display: block; width: 20px; height: 1px; background: rgba(255,255,255,0.25); }
     .cs-title { font-family: var(--font-display); font-size: clamp(64px, 10vw, 160px); line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; color: #fff; margin-bottom: clamp(20px, 2.5vw, 32px); }
-    .cs-descriptor { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+    .cs-descriptor { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
     /* Meta */
     .cs-meta { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--hairline-dark); border-bottom: 1px solid var(--hairline-dark); margin: 0 var(--pad); }
@@ -151,7 +150,7 @@
       body, a { cursor: auto; } .cursor { display: none; }
       body { overflow-y: auto; } .scroll-frame { position: static; overflow: visible; } .scroller { position: static; overflow: visible; height: auto; }
       .cs-header { flex-direction: column; align-items: flex-start; min-height: auto; }
-      .cs-hero-logo { width: clamp(100px, 28vw, 180px); align-self: flex-start; margin-top: 24px; }
+      .cs-hero-logo { width: clamp(120px, 32vw, 200px); align-self: flex-start; margin-top: 24px; }
       .cs-body { grid-template-columns: 1fr; }
       .cs-meta { grid-template-columns: repeat(2, 1fr); }
       .cs-meta-item:nth-child(2) { border-right: none; }
@@ -190,51 +189,62 @@
         <div class="cs-header">
           <div class="cs-header-text">
             <a href="/#work" class="cs-back">← All Work</a>
-            <p class="cs-number">Case Study — 04</p>
-            <h1 class="cs-title">CRS<br>Automotive</h1>
-            <p class="cs-descriptor">Web Design &nbsp;·&nbsp; Automotive &nbsp;·&nbsp; 2025</p>
+            <p class="cs-number">Case Study — 05</p>
+            <h1 class="cs-title">Morrisroe<br>Group</h1>
+            <p class="cs-descriptor">Web App &nbsp;·&nbsp; Employee Intranet &nbsp;·&nbsp; 2026</p>
           </div>
-          <img src="/assets/images/crs-logo.png" alt="CRS Automotive" class="cs-hero-logo" data-reveal>
+          <svg class="cs-hero-logo" data-reveal viewBox="0 0 325 53" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Morrisroe">
+            <path d="M50.2966 52.3056H41.8659V25.7015C41.8659 21.6281 39.7711 19.5856 35.5817 19.5856C33.1417 19.5856 31.0642 20.442 29.3608 22.1546V52.2998H20.9358V25.551C20.9358 21.576 18.6051 19.5914 13.9553 19.5914C11.9296 19.5914 10.0881 19.9386 8.43072 20.6329V52.3114H0V16.8778C3.72908 15.0725 8.38468 14.1699 13.9553 14.1699C19.2094 14.1699 23.0766 15.5354 25.5626 18.2664C28.5091 15.5354 32.4971 14.1699 37.5153 14.1699C41.6587 14.1699 44.9044 15.3503 47.2581 17.711C49.2838 19.7939 50.2966 22.4324 50.2966 25.6263V52.2998V52.3056Z"/>
+            <path d="M79.099 33.5475C79.099 24.1915 76.7281 19.5164 71.9862 19.5164C67.2442 19.5164 64.8675 24.1915 64.8675 33.5475C64.8675 42.9035 67.2385 47.2314 71.9862 47.2314C76.7338 47.2314 79.099 42.6721 79.099 33.5475ZM87.4607 33.6169C87.4607 39.4087 86.1947 44.0144 83.6568 47.4397C80.8945 51.1428 77.0043 53.0001 71.9804 53.0001C66.9565 53.0001 63.0663 51.1428 60.304 47.4397C57.7719 44.0144 56.5059 39.4087 56.5059 33.6169C56.5059 27.8251 57.7719 23.15 60.304 19.7247C63.0663 16.0216 66.9565 14.1643 71.9804 14.1643C77.0043 14.1643 80.9348 16.0158 83.6568 19.7247C86.1889 23.15 87.4607 27.7788 87.4607 33.6169Z"/>
+            <path d="M111.642 14.2395L109.985 20.419C108.742 20.0082 107.453 19.7941 106.112 19.7941C104.501 19.7941 103.165 20.095 102.107 20.6967V52.3H93.6816V16.878C97.779 14.8876 103.77 14.0081 111.642 14.2395Z"/>
+            <path d="M133.746 14.2395L132.089 20.419C130.846 20.0082 129.557 19.7941 128.216 19.7941C126.605 19.7941 125.269 20.095 124.211 20.6967V52.3H115.786V16.878C119.883 14.8876 125.874 14.0081 133.746 14.2395Z"/>
+            <path d="M146.597 52.3057H138.166V14.8643H146.597V52.3057ZM147.011 4.23537C147.011 5.39258 146.562 6.3762 145.664 7.18624C144.767 7.99629 143.673 8.40131 142.384 8.40131C141.095 8.40131 140.002 7.99629 139.104 7.18624C138.206 6.3762 137.757 5.39258 137.757 4.23537C137.757 3.07817 138.206 2.08297 139.104 1.24978C140.002 0.416594 141.095 0 142.384 0C143.673 0 144.767 0.405022 145.664 1.21507C146.562 2.02511 147.011 3.03188 147.011 4.23537Z"/>
+            <path d="M175.825 41.5379C175.825 44.6855 174.605 47.3702 172.165 49.592C169.725 51.8139 166.52 52.9248 162.56 52.9248C158.319 52.9248 154.889 52.0222 152.265 50.2169L154.475 44.8012C156.27 46.2362 158.595 46.9536 161.455 46.9536C163.159 46.9536 164.54 46.456 165.599 45.4608C166.658 44.4656 167.187 43.2043 167.187 41.6768C167.187 40.1493 166.773 38.8648 165.944 37.9621C165.116 37.0595 163.711 36.2379 161.732 35.4973C156.063 33.3217 153.232 29.827 153.232 25.0072C153.232 21.9522 154.325 19.3832 156.512 17.3002C158.699 15.2173 161.542 14.1758 165.046 14.1758C168.822 14.1758 172.044 15.0553 174.714 16.82L172.643 21.7497C170.934 20.361 168.96 19.6667 166.698 19.6667C165.041 19.6667 163.74 20.1412 162.796 21.0901C161.853 22.039 161.381 23.2136 161.381 24.6022C161.381 27.0555 163.222 29.0227 166.905 30.5039C172.85 32.9109 175.819 36.5908 175.819 41.5495"/>
+            <path d="M199.725 14.2395L198.067 20.419C196.824 20.0082 195.53 19.7941 194.194 19.7941C192.583 19.7941 191.248 20.095 190.189 20.6967V52.3H181.764V16.878C185.862 14.8876 191.852 14.0081 199.725 14.2395Z"/>
+            <path d="M223.969 33.5475C223.969 24.1915 221.598 19.5164 216.857 19.5164C212.115 19.5164 209.738 24.1915 209.738 33.5475C209.738 42.9035 212.109 47.2314 216.857 47.2314C221.604 47.2314 223.969 42.6721 223.969 33.5475ZM232.331 33.6169C232.331 39.4087 231.065 44.0144 228.527 47.4397C225.765 51.1428 221.875 53.0001 216.851 53.0001C211.827 53.0001 207.937 51.1428 205.174 47.4397C202.642 44.0144 201.376 39.4087 201.376 33.6169C201.376 27.8251 202.642 23.15 205.174 19.7247C207.937 16.0216 211.827 14.1643 216.851 14.1643C221.875 14.1643 225.805 16.0158 228.527 19.7247C231.059 23.15 232.331 27.7788 232.331 33.6169Z"/>
+            <path d="M260.104 30.0063C260.104 22.9242 257.664 19.3773 252.784 19.3773C250.205 19.3773 248.226 20.4188 246.845 22.5018C245.325 24.7699 244.606 28.0564 244.698 32.367L260.104 30.0063ZM267.982 33.339L245.182 36.6718C245.872 43.615 249.256 47.0924 255.339 47.0924C258.93 47.0924 262.066 46.3981 264.736 45.0094L266.739 50.3557C263.562 52.1205 259.459 52.9999 254.441 52.9999C249.095 52.9999 244.882 51.3046 241.798 47.9256C238.713 44.5466 237.171 39.7326 237.171 33.4779C237.171 27.2232 238.587 22.6754 241.418 19.2732C244.249 15.871 248.128 14.1699 253.06 14.1699C257.992 14.1699 261.813 15.8016 264.391 19.0649C266.969 22.3282 268.166 27.0901 267.982 33.339Z"/>
+            <path d="M278.576 52.7107V17.9772C278.576 17.8962 278.64 17.8326 278.72 17.8326H289.027C289.108 17.8326 289.171 17.8962 289.171 17.9772V52.7107C289.171 52.7917 289.108 52.8554 289.027 52.8554H278.72C278.64 52.8554 278.576 52.7917 278.576 52.7107ZM292.279 45.8543H302.585C302.666 45.8543 302.729 45.7906 302.729 45.7096V17.9772C302.729 17.8962 302.666 17.8326 302.585 17.8326H292.279C292.198 17.8326 292.135 17.8962 292.135 17.9772V45.7039C292.135 45.7849 292.198 45.8485 292.279 45.8485M305.831 38.8416H325.006C320.08 38.5697 316.282 33.449 316.282 25.7363V17.8268H305.831C305.75 17.8268 305.687 17.8904 305.687 17.9714V38.697C305.687 38.778 305.75 38.8416 305.831 38.8416ZM316.138 4.20068H281.552C279.912 4.20068 278.582 5.53726 278.582 7.18627V14.7023C278.582 14.7833 278.645 14.847 278.726 14.847H316.138C316.218 14.847 316.282 14.7833 316.282 14.7023V4.34533C316.282 4.26433 316.218 4.20068 316.138 4.20068Z"/>
+          </svg>
         </div>
 
         <div class="cs-meta" data-reveal>
-          <div class="cs-meta-item"><p class="cs-meta-key">Client</p><p class="cs-meta-val">CRS Automotive</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Client</p><p class="cs-meta-val">Morrisroe Group</p></div>
           <div class="cs-meta-item"><p class="cs-meta-key">Role</p><p class="cs-meta-val">Design &amp; Development</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Stack</p><p class="cs-meta-val">HTML / CSS / JS</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Year</p><p class="cs-meta-val">2025</p></div>
-          <div class="cs-meta-item"><p class="cs-meta-key">Live</p><p class="cs-meta-val"><a href="https://stxacy.com/crs-automotive" target="_blank" rel="noopener">stxacy.com/crs-automotive ↗</a></p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Stack</p><p class="cs-meta-val">HTML / CSS / JS · PWA</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Year</p><p class="cs-meta-val">2026</p></div>
+          <div class="cs-meta-item"><p class="cs-meta-key">Access</p><p class="cs-meta-val">Private deployment</p></div>
         </div>
 
         <div class="cs-body">
           <div data-reveal>
             <p class="cs-section-label">The Brief</p>
-            <h2 class="cs-section-heading">Parts, fast — no friction</h2>
-            <p class="cs-p">CRS Automotive required a product-forward web experience for a broad catalogue of automotive parts and components. The core requirement was simple: a buyer should be able to find the right part, understand the specification, and get to checkout without detours.</p>
-            <p class="cs-p">The site also needed to carry the weight of the febi-red brand — recognisable in the aftermarket parts space — while staying fast and practical across all devices.</p>
+            <h2 class="cs-section-heading">One home for a scattered workforce</h2>
+            <p class="cs-p">Morrisroe Group needed a single, always-on place for a workforce of 100+ employees — spread across sites and speaking different first languages — to reach HR, health &amp; safety, IT, and compliance information without hunting through email chains or a shared drive.</p>
+            <p class="cs-p">The brief called for something that felt native on a phone in a van as easily as on a desk browser, installable, working offline, and ready to sit behind proper company authentication once IT sign-off was in place.</p>
           </div>
           <div data-reveal>
             <p class="cs-section-label">The Approach</p>
-            <h2 class="cs-section-heading">Dark base, red accent, clear catalogue</h2>
-            <p class="cs-p">A dark base with the febi-red accent used selectively — for primary actions and brand moments — keeps urgency without overwhelming the product content. Part categories are laid out for scanability — part numbers, specifications, and compatibility information surface early so buyers can qualify products quickly.</p>
-            <p class="cs-p">Built in vanilla HTML, CSS, and JavaScript — no framework overhead. The result is a site that performs on both the broadband workshop computer and the mobile phone a mechanic reaches for mid-job.</p>
+            <h2 class="cs-section-heading">A PWA, not a portal</h2>
+            <p class="cs-p">Built lightweight — no framework overhead — as an installable progressive web app with a service worker for offline access. Role-based dashboards separate employee, manager, and admin views, structured from day one to slot into Azure AD single sign-on.</p>
+            <p class="cs-p">Twenty-three languages with full right-to-left support mean the platform speaks to the whole workforce, not just the head-office majority — a detail that matters far more than another animation ever would.</p>
           </div>
         </div>
 
         <div class="cs-detail" data-reveal>
-          <div class="cs-detail-item"><p class="cs-detail-label">Palette</p><p class="cs-detail-text">Near-black as the primary surface. Febi-red for actions and brand moments. Off-white for text — maximum contrast on every part card.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">Catalogue</p><p class="cs-detail-text">Parts are grouped by system — hub, shaft, axle, sensors, wiring — so trade buyers can navigate by knowledge, not search terms.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">Product cards</p><p class="cs-detail-text">Each part card leads with imagery, then part number and compatibility. The buy path is one action — no unnecessary intermediate screens.</p></div>
-          <div class="cs-detail-item"><p class="cs-detail-label">Performance</p><p class="cs-detail-text">Zero dependencies. Static HTML deployed on GitHub Pages. Reliable in workshops where connection quality is inconsistent.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Palette</p><p class="cs-detail-text">Morrisroe navy and blue carry the same authority indoors as the brand does on-site — deliberately restrained, built to age well.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Content</p><p class="cs-detail-text">Eight policy areas — HR, health &amp; safety, GDPR, IT, cyber, quality, environmental, CSR — structured so non-technical staff can keep them current.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Reach</p><p class="cs-detail-text">23-language i18n layer with RTL support for Arabic and Urdu, plus a service worker so core content is available with no signal.</p></div>
+          <div class="cs-detail-item"><p class="cs-detail-label">Access</p><p class="cs-detail-text">Role-based views for employee, manager, and admin — wired for Azure AD / MSAL so login becomes a company account, not a shared password.</p></div>
         </div>
 
         <div class="cs-cta">
-          <p class="cs-cta-text">Live at stxacy.com/crs-automotive</p>
-          <a href="https://stxacy.com/crs-automotive" target="_blank" rel="noopener" class="cs-cta-btn"><span>Visit the site ↗</span></a>
+          <p class="cs-cta-text">Need something similar for your team?</p>
+          <a href="/contact" class="cs-cta-btn"><span>Start a conversation →</span></a>
         </div>
 
         <div class="cs-next">
-          <a href="/kingscote"><p class="cs-next-label">← Prev</p><p class="cs-next-name">Kingscote Haulage</p></a>
-          <a href="/morrisroe"><p class="cs-next-label">Next Project</p><p class="cs-next-name">Morrisroe Group →</p></a>
+          <a href="/crs"><p class="cs-next-label">← Prev</p><p class="cs-next-name">CRS Automotive</p></a>
+          <a href="/psr"><p class="cs-next-label">Next Project</p><p class="cs-next-name">PSR London →</p></a>
         </div>
 
         <footer>
