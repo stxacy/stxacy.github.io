@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Vik Rathore — Designer & Developer | STXACY</title>
   <meta name="description" content="Portfolio of Vik Rathore (STXACY) — London-based designer and developer building purposeful digital experiences. Available for new projects.">
+  <link rel="canonical" href="https://stxacy.com/">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/stxacy-favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/images/stxacy-favicon-512.png">
   <link rel="apple-touch-icon" href="assets/images/stxacy-favicon-512.png">
@@ -18,15 +19,38 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Vik Rathore",
-    "alternateName": "STXACY",
-    "url": "https://stxacy.com",
-    "email": "vik@stxacy.com",
-    "jobTitle": "Designer & Developer",
-    "description": "London-based designer and developer specialising in hand-coded web builds, digital experience design, and brand identity.",
-    "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
-    "sameAs": ["https://www.instagram.com/stxacy/", "https://dribbble.com/stxacy"]
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://stxacy.com/#person",
+        "name": "Vik Rathore",
+        "alternateName": "STXACY",
+        "url": "https://stxacy.com",
+        "email": "vik@stxacy.com",
+        "jobTitle": "Designer & Developer",
+        "description": "London-based designer and developer specialising in hand-coded web builds, digital experience design, and brand identity.",
+        "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
+        "sameAs": [
+          "https://www.instagram.com/stxacy/",
+          "https://dribbble.com/stxacy",
+          "https://www.linkedin.com/in/vik-rathore-98381a16a/"
+        ],
+        "worksFor": { "@id": "https://stxacy.com/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://stxacy.com/#organization",
+        "name": "STXACY",
+        "url": "https://stxacy.com",
+        "logo": "https://stxacy.com/assets/images/stxacy-favicon-512.png",
+        "founder": { "@id": "https://stxacy.com/#person" },
+        "sameAs": [
+          "https://www.instagram.com/stxacy/",
+          "https://dribbble.com/stxacy",
+          "https://www.linkedin.com/in/vik-rathore-98381a16a/"
+        ]
+      }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
