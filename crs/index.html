@@ -12,7 +12,7 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://stxacy.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://stxacy.com/#work" },
+      { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://stxacy.com/work" },
       { "@type": "ListItem", "position": 3, "name": "CRS Automotive", "item": "https://stxacy.com/crs" }
     ]
   }
@@ -143,7 +143,7 @@
     .footer-email { font-family: var(--font-editorial); font-weight: 900; font-size: clamp(22px, 2.8vw, 42px); letter-spacing: -0.025em; color: var(--paper); transition: color 0.3s ease; }
     .footer-email:hover { color: var(--muted-dark); }
     .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
-    .footer-nav { display: flex; gap: 24px; }
+    .footer-nav { flex-wrap: wrap; row-gap: 12px; display: flex; gap: 24px; }
     .footer-nav a { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-dark); transition: color 0.3s ease; }
     .footer-nav a:hover { color: var(--paper); }
     .footer-copy { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--hairline-dark); }
@@ -174,7 +174,8 @@
     @media (max-width: 600px) {
       .cs-next { flex-direction: column; align-items: flex-start; gap: 20px; }
       footer { flex-direction: column; align-items: flex-start; } .footer-right { align-items: flex-start; }
-      .nav-links { gap: 20px; }
+      .nav-links { gap: 14px; }
+      #mainNav { padding: 0 16px; }
     }
   </style>
 </head>
@@ -189,7 +190,8 @@
   <nav id="mainNav">
     <a href="/" class="nav-logo"><img src="/assets/images/stxacy-wordmark-white-transparent.png" alt="STXACY" class="nav-wordmark"></a>
     <ul class="nav-links">
-      <li><a href="/#work" class="active">Work</a></li>
+      <li><a href="/work" class="active">Work</a></li>
+      <li><a href="/motion">Motion</a></li>
       <li><a href="/info">Info</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
@@ -200,7 +202,7 @@
 
         <div class="cs-header">
           <div class="cs-header-text">
-            <a href="/#work" class="cs-back">← All Work</a>
+            <a href="/work" class="cs-back">← All Work</a>
             <p class="cs-number">Case Study — 06</p>
             <h1 class="cs-title">CRS<br>Automotive</h1>
             <p class="cs-descriptor">Web Design &nbsp;·&nbsp; Automotive &nbsp;·&nbsp; 2025</p>
@@ -245,7 +247,7 @@
 
         <div class="cs-next">
           <a href="/psr"><p class="cs-next-label">← Prev</p><p class="cs-next-name">PSR London</p></a>
-          <a href="/#work"><p class="cs-next-label">Back to</p><p class="cs-next-name">All Work →</p></a>
+          <a href="/work"><p class="cs-next-label">Back to</p><p class="cs-next-name">All Work →</p></a>
         </div>
 
         <footer>
@@ -254,7 +256,7 @@
             <a href="mailto:vik@stxacy.com" class="footer-email">vik@stxacy.com</a>
           </div>
           <div class="footer-right">
-            <nav class="footer-nav" aria-label="Footer"><a href="/#work">Work</a><a href="/info">Info</a><a href="/contact">Contact</a></nav>
+            <nav class="footer-nav" aria-label="Footer"><a href="/work">Work</a><a href="/motion">Motion</a><a href="/info">Info</a><a href="/contact">Contact</a></nav>
             <span class="footer-copy">© STXACY 2026</span>
           </div>
         </footer>
